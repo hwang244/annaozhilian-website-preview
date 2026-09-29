@@ -1,0 +1,8 @@
+# Keep source documents and working files out of the public preview repository.
+*.docx
+*.pdf
+*.png
+*.zip
+research/
+qa/
+build.mjs
