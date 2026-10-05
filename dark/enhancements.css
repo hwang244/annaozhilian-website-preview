@@ -12,7 +12,11 @@ html[lang=en] .brand-word small{font-size:7px!important;letter-spacing:.45px!imp
 .legal-en{display:block;color:#8ca5bd;font-size:9px;font-weight:500;letter-spacing:0;margin-top:4px}
 .brand-reference-section{padding:64px 0;border-bottom:1px solid var(--line);background:linear-gradient(110deg,#091525,#111f35)}
 .brand-reference-card{display:grid;grid-template-columns:.92fr 1.08fr;gap:55px;align-items:center}
-.brand-reference-card>img{width:100%;height:auto;aspect-ratio:1136/686;object-fit:cover;border-radius:9px;border:1px solid #2d5f9a;box-shadow:0 18px 65px #0006}
+.brand-logo-panel{width:100%;aspect-ratio:1136/686;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:5%;overflow:hidden;color:#fff;border-radius:9px;border:1px solid #2d5f9a;box-shadow:0 18px 65px #0006;background:radial-gradient(circle at 20% 15%,#32a7fa 0%,transparent 52%),linear-gradient(125deg,#1d8be4,#0b55c2 60%,#07328e)}
+.brand-logo-panel img{width:20%;height:30%;min-width:62px;object-fit:contain}
+.brand-logo-panel strong{font-family:Arial,sans-serif;font-size:clamp(18px,2.4vw,31px);font-weight:800;letter-spacing:.02em;line-height:1.1;margin-top:3%}
+.brand-logo-panel span{font-size:clamp(9px,1.2vw,16px);font-weight:700;letter-spacing:.2em;margin-top:1%}
+.brand-logo-panel b{font-size:clamp(16px,2.55vw,34px);font-weight:800;letter-spacing:.04em;white-space:nowrap;line-height:1.12;margin-top:auto}
 .brand-reference-card h2{font-size:30px;line-height:1.45;margin-bottom:16px}
 .brand-reference-card p:not(.eyebrow){font-size:13px;color:#b5c8dd}
 .brand-reference-card .brand-company-en{font-size:12px!important;color:#8ec8e8!important;margin-top:12px;line-height:1.6}
