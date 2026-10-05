@@ -21,3 +21,19 @@ html[lang=en] .hero h1{font-size:clamp(46px,4.7vw,66px);font-weight:800;line-hei
 @media(max-width:760px){html[lang=en] .solution-tabs button{display:block;font-size:13px;white-space:normal;text-align:left;line-height:1.5}html[lang=en] .solution-tabs button>span{display:block;margin-bottom:7px}}
 @media(max-width:360px){.hero-sculpture img{height:290px}}
 @media(prefers-reduced-motion:reduce){.technology-card{transition:none}}
+
+/* Official REHABILITATION identity, adapted from the supplied logo. */
+.brand-symbol{background:linear-gradient(145deg,#228fea,#094fb8);border-radius:8px;padding:5px;object-fit:contain;box-shadow:0 4px 18px #075dc529}
+.brand-word,html[lang=en] .brand-word{font-family:Arial,"PingFang SC",sans-serif;font-size:15px!important;font-weight:800;letter-spacing:.35px!important;white-space:nowrap;color:#153c79}
+.brand-word small{font-family:"PingFang SC",Arial,sans-serif;font-size:9px!important;font-weight:700;letter-spacing:1px!important;margin-top:5px!important;white-space:nowrap;color:#3464ae}
+html[lang=en] .brand-word small{font-size:7px!important;letter-spacing:.45px!important}
+.footer-main .brand-word{font-size:14px!important}
+.legal-en{display:block;color:#647b98;font-size:9px;font-weight:500;letter-spacing:0;margin-top:4px}
+.brand-reference-section{padding:72px 0;background:#f1f6ff;border-bottom:1px solid var(--line)}
+.brand-reference-card{display:grid;grid-template-columns:.92fr 1.08fr;gap:60px;align-items:center}
+.brand-reference-card>img{width:100%;height:auto;aspect-ratio:1136/686;object-fit:cover;border-radius:12px;box-shadow:0 18px 55px #174ba523}
+.brand-reference-card h2{font-size:36px;line-height:1.35;margin-bottom:20px}
+.brand-reference-card p:not(.eyebrow){font-size:16px;color:#465d7a}
+.brand-reference-card .brand-company-en{font-size:14px!important;color:#245fe5!important;font-weight:700;margin-top:14px;line-height:1.5}
+@media(max-width:1000px){.brand-reference-card{gap:35px}.brand-reference-card h2{font-size:29px}}
+@media(max-width:760px){.brand-symbol{padding:4px}.brand-word,html[lang=en] .brand-word{font-size:13px!important}.brand-word small{font-size:8px!important}html[lang=en] .brand-word small{font-size:6px!important}.brand-reference-section{padding:43px 0}.brand-reference-card{grid-template-columns:1fr;gap:28px}.brand-reference-card h2{font-size:26px}.brand-reference-card p:not(.eyebrow){font-size:14px}}

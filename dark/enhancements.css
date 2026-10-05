@@ -1,9 +1,21 @@
 @charset "UTF-8";
 
-/* Image-led extension of the dark POSTCARE design. All photos are illustrative concepts. */
+/* Image-led extension of the dark REHABILITATION design. All photos are illustrative concepts. */
 body{font-weight:500}
 p,.section-desc,.news-card p,.detail-copy>p{font-weight:500}
 .metric strong{font-weight:600}
+.brand-symbol{background:linear-gradient(145deg,#228fea,#094fb8);border-radius:8px;padding:5px;object-fit:contain;box-shadow:0 4px 18px #087fea30}
+.brand-word,html[lang=en] .brand-word{font-family:Arial,"PingFang SC",sans-serif;font-size:15px!important;font-weight:800;letter-spacing:.35px!important;white-space:nowrap}
+.brand-word small{font-family:"PingFang SC",Arial,sans-serif;font-size:9px!important;font-weight:600;letter-spacing:1px!important;margin-top:5px!important;white-space:nowrap}
+html[lang=en] .brand-word small{font-size:7px!important;letter-spacing:.45px!important}
+.footer-main .brand-word{font-size:14px!important}
+.legal-en{display:block;color:#8ca5bd;font-size:9px;font-weight:500;letter-spacing:0;margin-top:4px}
+.brand-reference-section{padding:64px 0;border-bottom:1px solid var(--line);background:linear-gradient(110deg,#091525,#111f35)}
+.brand-reference-card{display:grid;grid-template-columns:.92fr 1.08fr;gap:55px;align-items:center}
+.brand-reference-card>img{width:100%;height:auto;aspect-ratio:1136/686;object-fit:cover;border-radius:9px;border:1px solid #2d5f9a;box-shadow:0 18px 65px #0006}
+.brand-reference-card h2{font-size:30px;line-height:1.45;margin-bottom:16px}
+.brand-reference-card p:not(.eyebrow){font-size:13px;color:#b5c8dd}
+.brand-reference-card .brand-company-en{font-size:12px!important;color:#8ec8e8!important;margin-top:12px;line-height:1.6}
 .market-kicker{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--cyan)}
 
 /* 03 — show the care setting, interactive training and home continuation together. */
@@ -83,12 +95,15 @@ body[data-page=contact] .page-hero-image img{object-position:50% 49%;filter:satu
 .photo-visual>small{z-index:1;color:#e4f6ff;bottom:19px;left:23px;font-size:10px;font-weight:600;background:#0717268c;padding:5px 8px;border-radius:3px}
 
 @media(max-width:1000px){
+  .brand-reference-card{gap:30px}.brand-reference-card h2{font-size:25px}
   .training-gallery figure{height:135px}
   .training-gallery figcaption{display:block}.training-gallery figcaption span{display:block;margin-top:3px}
   .market-showcase{grid-template-columns:1.2fr .8fr}.market-categories{grid-template-columns:1fr 1fr;gap:0 12px}.market-item{grid-template-columns:19px minmax(0,1fr)}.market-item em{display:none}
   .page-hero-image{left:38%}
 }
 @media(max-width:760px){
+  .brand-symbol{padding:4px}.brand-word,html[lang=en] .brand-word{font-size:13px!important}.brand-word small{font-size:8px!important}html[lang=en] .brand-word small{font-size:6px!important}
+  .brand-reference-section{padding:40px 0}.brand-reference-card{grid-template-columns:1fr;gap:25px}.brand-reference-card h2{font-size:23px}
   .training-gallery{grid-template-columns:1fr 1fr;gap:10px}.training-gallery figure{height:150px}.training-gallery figure:last-child{grid-column:1/-1}.training-gallery figcaption{inset:auto 12px 10px}
   .market-showcase{display:flex;flex-direction:column-reverse;margin-top:23px}.market-photo{height:180px;flex:none}.market-photo:after{background:linear-gradient(0deg,#071320c9,transparent 58%)}.market-copy{padding:20px}.market-heading h3{font-size:21px}.market-categories{grid-template-columns:1fr 1fr;gap:0 12px}.market-item strong{font-size:12px}.market-item span{font-size:9px}
   #insights .section-top{margin-bottom:9px}.insights-head p{display:none}.insights-rail{grid-auto-columns:min(78vw,330px);gap:12px}.insights-rail .news-cover{height:165px}.wechat-band{align-items:flex-start;padding:16px;gap:12px;flex-wrap:wrap}.wechat-emblem{height:44px;width:44px;font-size:17px}.wechat-band h3{font-size:15px}.wechat-search{margin:0 0 0 56px}

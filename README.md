@@ -8,4 +8,6 @@
 
 深色版已加入按场景挑选的图片、03 技术三联图、04 健康商城规划展示和 05 横向动态栏。公众号名称为「上海安脑智联」，文章链接与二维码尚待核实。英文页面使用公司全称 **AnnoBrain Intelligence Technology (Shanghai) Co., Ltd.**；`annobrain.com` 目前仅为推荐域名。
 
+两版均使用用户提供的 `logo-original.jpg` 原图作为品牌展示，并在导航及 favicon 中使用按该图提取的简化标志。站内展示名统一为 **REHABILITATION**，中文页面页脚同时列出上述英文公司全称。
+
 GitHub Pages 可在仓库的 Settings → Pages 中选择 Deploy from a branch、`main`、`/(root)`，网站会提供 `https://<用户名>.github.io/<仓库名>/` 地址。
