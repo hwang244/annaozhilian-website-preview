@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+/* Image-led extension of the dark POSTCARE design. All photos are illustrative concepts. */
+body{font-weight:500}
+p,.section-desc,.news-card p,.detail-copy>p{font-weight:500}
+.metric strong{font-weight:600}
+.market-kicker{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--cyan)}
+
+/* 03 — show the care setting, interactive training and home continuation together. */
+.training-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:28px}
+.training-gallery figure{margin:0;position:relative;height:155px;overflow:hidden;border:1px solid #49708a66;border-radius:6px;background:#112033}
+.training-gallery figure:after{content:"";position:absolute;inset:20% 0 0;background:linear-gradient(transparent,#071422de);pointer-events:none}
+.training-gallery img{width:100%;height:100%;object-fit:cover;filter:saturate(.8) contrast(1.06);transition:transform .6s}
+.training-gallery figure:hover img{transform:scale(1.05)}
+.training-gallery figcaption{position:absolute;inset:auto 17px 14px;z-index:1;display:flex;justify-content:space-between;align-items:end;gap:12px;font-size:12px;font-weight:600;line-height:1.5}
+.training-gallery figcaption b{font-size:9px;letter-spacing:1.4px;color:#8fe9f9;white-space:nowrap}
+
+/* 04 — public-facing range, without internal procurement or margin data. */
+.data-screen .metrics{margin:37px 0 30px}
+.market-showcase{display:grid;grid-template-columns:1.3fr .7fr;min-height:365px;margin-top:26px;border:1px solid #34506d;border-radius:9px;background:linear-gradient(135deg,#0d2337,#0b1528 55%,#0a1322);overflow:hidden;box-shadow:0 20px 70px #0003}
+.market-copy{padding:26px 30px 23px;display:flex;flex-direction:column}
+.market-heading h3{font-size:24px;line-height:1.45;margin:6px 0 4px}
+.market-heading p{font-size:11px;color:#9baec2;line-height:1.6}
+.market-categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 25px;margin-top:18px}
+.market-item{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:9px;align-items:center;border-top:1px solid #85b6cf31;padding:10px 0;min-width:0}
+.market-item b{font-size:9px;color:var(--cyan)}
+.market-item strong{display:block;font-size:13px;font-weight:650}
+.market-item span{display:block;font-size:10px;color:#93a9bf;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.market-item em{font-size:9px;font-style:normal;color:#9fcae1;border:1px solid #4e748a;padding:4px 5px;border-radius:3px;white-space:nowrap}
+.market-disclaimer{font-size:9px;color:#8299af;margin-top:auto;padding-top:12px;line-height:1.5}
+.market-photo{position:relative;overflow:hidden;background:#092037}
+.market-photo img{width:100%;height:100%;object-fit:cover;object-position:48% center;filter:saturate(.65) contrast(1.08)}
+.market-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0b1729bd,transparent 35%),linear-gradient(0deg,#071320dc,transparent 42%)}
+.market-photo span{position:absolute;z-index:1;bottom:20px;left:22px;right:22px;font-size:13px;font-weight:650;letter-spacing:.5px}
+
+/* 05 — sideways story rail, inspired by the reference site's news interaction. */
+#insights .section-top{margin-bottom:17px}
+.insights-head{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:15px}
+.insights-head p{font-size:10px;color:#8fa2b8}
+.insights-controls{display:flex;align-items:center;gap:8px}
+.rail-button{width:38px;height:38px;border:1px solid #45728d;background:#13283a;border-radius:50%;font-size:20px;line-height:1}
+.rail-button:hover{border-color:var(--cyan);background:#16445a}
+.rail-count{font-size:10px;letter-spacing:1.5px;color:#93a9bf;padding-left:12px}
+.insights-rail{position:relative;display:grid;grid-auto-flow:column;grid-auto-columns:clamp(260px,26vw,350px);gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#37718b #112035;padding:3px 2px 17px;overscroll-behavior-inline:contain}
+.insights-rail .news-card{scroll-snap-align:start;border:1px solid #35526b;background:#101b2d;border-radius:6px;padding:10px 10px 16px}
+.insights-rail .news-cover{height:155px;margin-bottom:15px}
+.insights-rail .news-card h3{font-size:15px;line-height:1.6;padding:0 6px;margin-bottom:8px}
+.insights-rail .news-card p{font-size:11px;padding:0 6px}
+.insights-rail .news-card .news-meta{padding:0 6px;margin-bottom:7px}
+.insights-rail .news-card .text-link{padding:0 6px}
+.news-cover.photo-cover{position:relative}
+.news-cover.photo-cover img{width:100%;height:100%;object-fit:cover;filter:saturate(.68) brightness(.78);transition:transform .6s}
+.news-card:hover .photo-cover img{transform:scale(1.06)}
+.photo-cover:after{content:"";position:absolute;inset:40% 0 0;background:linear-gradient(transparent,#071627a8)}
+.photo-cover small{z-index:1}
+.wechat-band{margin-top:22px;padding:17px 20px;display:flex;align-items:center;gap:18px;border:1px solid #2d615c;background:linear-gradient(100deg,#0d3031,#101e2d 60%);border-radius:6px}
+.wechat-emblem{width:54px;height:54px;flex:none;display:grid;place-items:center;border-radius:12px;background:#1f796b;color:white;font-size:20px;font-weight:700;box-shadow:0 0 30px #00d4aa27}
+.wechat-emblem span{display:none}
+.wechat-band h3{font-size:17px;margin:4px 0 2px}
+.wechat-band p{font-size:11px;color:#a1bcb9}
+.wechat-search{margin-left:auto;border:1px solid #2c9c8b;padding:10px 13px;border-radius:4px;color:#b8f6eb;font-size:11px;white-space:nowrap}
+.wechat-page-note{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:17px 20px;margin-bottom:32px;border:1px solid #36665f;background:#102c2d;border-radius:5px;font-size:11px;color:#a4c1be}
+.wechat-page-note strong{font-size:16px;color:#e5fff9}
+
+/* Each top-level page gets its own picture while retaining one visual language. */
+.page-hero{min-height:365px;display:flex;align-items:center;background:#0c1524}
+.page-hero .container{position:relative;z-index:2}
+.page-hero h1{max-width:690px;font-weight:650}
+.page-hero .section-desc{max-width:610px}
+.page-hero-image{position:absolute;inset:0 0 0 45%;overflow:hidden}
+.page-hero-image img{width:100%;height:100%;object-fit:cover;filter:saturate(.66) contrast(1.08) brightness(.72)}
+.page-hero-image:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0c1524 0%,#0c1524b8 20%,#0c15242b 68%),linear-gradient(0deg,#0c1524b3,transparent 45%)}
+.page-hero-image small{position:absolute;right:28px;bottom:19px;z-index:1;padding:5px 8px;border-radius:3px;background:#0716258c;color:#d9eef6;font-size:9px;font-weight:600;letter-spacing:.5px}
+.page-hero .ghost-word{z-index:1}
+body[data-page=product] .page-hero-image img{object-position:center 43%}
+body[data-page=tech] .page-hero-image img{object-position:50% 47%;filter:hue-rotate(4deg) saturate(.72) brightness(.68)}
+body[data-page=news] .page-hero-image img{object-position:57% 50%;filter:saturate(.76) brightness(.63)}
+body[data-page=about] .page-hero-image img{object-position:50% 43%;filter:saturate(.48) brightness(.69)}
+body[data-page=contact] .page-hero-image img{object-position:50% 49%;filter:saturate(.61) brightness(.66)}
+.photo-visual{padding:0;min-height:390px;background:#102235}
+.photo-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.76) contrast(1.06) brightness(.84)}
+.photo-visual:after{content:"";position:absolute;inset:50% 0 0;background:linear-gradient(transparent,#081626a9)}
+.photo-visual>small{z-index:1;color:#e4f6ff;bottom:19px;left:23px;font-size:10px;font-weight:600;background:#0717268c;padding:5px 8px;border-radius:3px}
+
+@media(max-width:1000px){
+  .training-gallery figure{height:135px}
+  .training-gallery figcaption{display:block}.training-gallery figcaption span{display:block;margin-top:3px}
+  .market-showcase{grid-template-columns:1.2fr .8fr}.market-categories{grid-template-columns:1fr 1fr;gap:0 12px}.market-item{grid-template-columns:19px minmax(0,1fr)}.market-item em{display:none}
+  .page-hero-image{left:38%}
+}
+@media(max-width:760px){
+  .training-gallery{grid-template-columns:1fr 1fr;gap:10px}.training-gallery figure{height:150px}.training-gallery figure:last-child{grid-column:1/-1}.training-gallery figcaption{inset:auto 12px 10px}
+  .market-showcase{display:flex;flex-direction:column-reverse;margin-top:23px}.market-photo{height:180px;flex:none}.market-photo:after{background:linear-gradient(0deg,#071320c9,transparent 58%)}.market-copy{padding:20px}.market-heading h3{font-size:21px}.market-categories{grid-template-columns:1fr 1fr;gap:0 12px}.market-item strong{font-size:12px}.market-item span{font-size:9px}
+  #insights .section-top{margin-bottom:9px}.insights-head p{display:none}.insights-rail{grid-auto-columns:min(78vw,330px);gap:12px}.insights-rail .news-cover{height:165px}.wechat-band{align-items:flex-start;padding:16px;gap:12px;flex-wrap:wrap}.wechat-emblem{height:44px;width:44px;font-size:17px}.wechat-band h3{font-size:15px}.wechat-search{margin:0 0 0 56px}
+  .page-hero{min-height:385px;align-items:flex-end;padding:80px 0 42px}.page-hero-image{inset:0}.page-hero-image img{filter:saturate(.58) brightness(.45)!important}.page-hero-image:after{background:linear-gradient(0deg,#0c1524 3%,#0c1524b8 56%,#0c15246b)}.page-hero h1{font-size:33px}.page-hero .ghost-word{display:none}.photo-visual{min-height:310px}
+}
+@media(max-width:410px){.training-gallery figcaption span{font-size:10px}.market-categories{grid-template-columns:1fr}.market-item{grid-template-columns:19px minmax(0,1fr) auto}.market-item em{display:block}.wechat-search{margin-left:0;white-space:normal}}
+@media(prefers-reduced-motion:reduce){.insights-rail{scroll-behavior:auto}}

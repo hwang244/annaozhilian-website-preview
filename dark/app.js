@@ -101,6 +101,28 @@
     nearestScreen();
   }
 
+  const insightsRail = document.querySelector('#insights-rail');
+  if (insightsRail) {
+    const cards = [...insightsRail.querySelectorAll('.news-card')];
+    const count = document.querySelector('.rail-count');
+    const updateRail = () => {
+      const active = cards.reduce((best, card, i) =>
+        Math.abs(card.offsetLeft - insightsRail.scrollLeft) < Math.abs(cards[best].offsetLeft - insightsRail.scrollLeft) ? i : best, 0);
+      count.textContent = `${String(active + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+      document.querySelector('[data-rail-prev]').disabled = active === 0;
+      document.querySelector('[data-rail-next]').disabled = active === cards.length - 1;
+    };
+    document.querySelector('[data-rail-prev]').addEventListener('click', () => insightsRail.scrollBy({left: -cards[0].offsetWidth - 18, behavior: reduced.matches ? 'instant' : 'smooth'}));
+    document.querySelector('[data-rail-next]').addEventListener('click', () => insightsRail.scrollBy({left: cards[0].offsetWidth + 18, behavior: reduced.matches ? 'instant' : 'smooth'}));
+    insightsRail.addEventListener('scroll', () => requestAnimationFrame(updateRail), {passive:true});
+    insightsRail.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      insightsRail.scrollBy({left: (e.key === 'ArrowRight' ? 1 : -1) * (cards[0].offsetWidth + 18), behavior: reduced.matches ? 'instant' : 'smooth'});
+    });
+    updateRail();
+  }
+
   const openModal = opener => { modalOpener = opener || document.activeElement; modal.showModal(); };
   document.querySelector('.modal-close').addEventListener('click', () => modal.close());
   modal.addEventListener('click', e => {
