@@ -11,8 +11,10 @@
 .brand-logo-panel b{font-size:clamp(14px,2vw,26px)}
 
 /* The product and technology areas share a plum family, as separate environments. */
-body[data-page=product],body[data-page=tech]{background:#2b1535}
-body[data-page=product] .site-header,body[data-page=tech] .site-header{background:#3c1744ed;border-bottom-color:#ffffff2b}
+body[data-page=product]{background:#2b1535}
+body[data-page=tech]{background:#201a43}
+body[data-page=product] .site-header{background:#3c1744ed;border-bottom-color:#ffffff2b}
+body[data-page=tech] .site-header{background:#211a4aee;border-bottom-color:#ffffff2b}
 body[data-page=product] .brand-mark,body[data-page=tech] .brand-mark{background:none;box-shadow:none}
 body[data-page=product] .main-nav a,body[data-page=tech] .main-nav a{color:#f4deef}
 body[data-page=product] .main-nav a:hover,body[data-page=tech] .main-nav a:hover,body[data-page=product] .main-nav a[aria-current=page],body[data-page=tech] .main-nav a[aria-current=page]{color:white}
@@ -28,12 +30,15 @@ body[data-page=tech] .page-hero--tech .page-hero-image:after{background:linear-g
 body[data-page=product] .page-hero-side,body[data-page=tech] .page-hero-side{background:#27142fd9;border-color:#f2bee2}
 body[data-page=product] .page-hero .subnav a,body[data-page=tech] .page-hero .subnav a{border-color:#ffffff75;background:#ffffff16;color:#fff}
 body[data-page=product] .page-hero .subnav a:hover,body[data-page=tech] .page-hero .subnav a:hover{background:#ffffff30;border-color:#fff}
-body[data-page=product] #patient,body[data-page=tech] .content-section{background:#2e173a}
-body[data-page=product] #expert,body[data-page=tech] .content-section:nth-of-type(odd){background:#3c1b46}
+body[data-page=product] #patient{background:#2e173a}
+body[data-page=product] #expert{background:#3c1b46}
 body[data-page=product] #organization{background:#291531}
+body[data-page=tech] .content-section{background:#211b45}
+body[data-page=tech] .content-section:nth-of-type(odd){background:#2d2350}
 body[data-page=product] .photo-visual,body[data-page=tech] .photo-visual{border-color:#a673a6}
 body[data-page=product] .detail-copy,body[data-page=tech] .detail-copy{color:#fff}
-body[data-page=product] .site-footer,body[data-page=tech] .site-footer{background:#211129}
+body[data-page=product] .site-footer{background:#211129}
+body[data-page=tech] .site-footer{background:#17162f}
 
 /* Insights switches to the blue-on-white identity. */
 body[data-page=news]{--text:#183b60;--muted:#52708a;--line:#c8d8e9;background:#f4f8fc;color:#183b60}
@@ -130,7 +135,8 @@ body[data-page=news] .site-footer p,body[data-page=news] .site-footer .footer-li
   .brand-word,html[lang=en] .brand-word{font-size:18px!important}
   body[data-page=news] .main-nav{background:#fff;border-color:#d5e3ef}
   body[data-page=news] .main-nav a{border-color:#d5e3ef}
-  body[data-page=product] .main-nav,body[data-page=tech] .main-nav{background:#3c1744;border-color:#ffffff44}
+  body[data-page=product] .main-nav{background:#3c1744;border-color:#ffffff44}
+  body[data-page=tech] .main-nav{background:#211a4a;border-color:#ffffff44}
   body[data-page=product] .main-nav a,body[data-page=tech] .main-nav a{border-color:#ffffff36}
   body[data-page=product] .page-hero .page-hero-image:after{background:linear-gradient(0deg,#471747e8,transparent 70%)}
   body[data-page=tech] .page-hero .page-hero-image:after{background:linear-gradient(0deg,#271641e8,transparent 70%)}
