@@ -101,26 +101,29 @@
     nearestScreen();
   }
 
-  const insightsRail = document.querySelector('#insights-rail');
-  if (insightsRail) {
-    const cards = [...insightsRail.querySelectorAll('.news-card')];
-    const count = document.querySelector('.rail-count');
-    const updateRail = () => {
-      const active = cards.reduce((best, card, i) =>
-        Math.abs(card.offsetLeft - insightsRail.scrollLeft) < Math.abs(cards[best].offsetLeft - insightsRail.scrollLeft) ? i : best, 0);
-      count.textContent = `${String(active + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
-      document.querySelector('[data-rail-prev]').disabled = active === 0;
-      document.querySelector('[data-rail-next]').disabled = active === cards.length - 1;
+  for (const shell of document.querySelectorAll('[data-story-carousel]')) {
+    const rail = shell.querySelector('.story-rail');
+    const slides = [...rail.querySelectorAll('.story-slide')];
+    const prev = shell.querySelector('[data-story-prev]');
+    const next = shell.querySelector('[data-story-next]');
+    const count = shell.querySelector('.story-count');
+    let active = 0;
+    const update = () => {
+      active = Math.max(0, Math.min(slides.length - 1, Math.round(rail.scrollLeft / Math.max(rail.clientWidth, 1))));
+      count.textContent = `${String(active + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+      prev.disabled = active === 0;
+      next.disabled = active === slides.length - 1;
     };
-    document.querySelector('[data-rail-prev]').addEventListener('click', () => insightsRail.scrollBy({left: -cards[0].offsetWidth - 18, behavior: reduced.matches ? 'instant' : 'smooth'}));
-    document.querySelector('[data-rail-next]').addEventListener('click', () => insightsRail.scrollBy({left: cards[0].offsetWidth + 18, behavior: reduced.matches ? 'instant' : 'smooth'}));
-    insightsRail.addEventListener('scroll', () => requestAnimationFrame(updateRail), {passive:true});
-    insightsRail.addEventListener('keydown', e => {
-      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-      e.preventDefault();
-      insightsRail.scrollBy({left: (e.key === 'ArrowRight' ? 1 : -1) * (cards[0].offsetWidth + 18), behavior: reduced.matches ? 'instant' : 'smooth'});
+    const go = index => rail.scrollTo({left: Math.max(0, Math.min(slides.length - 1, index)) * rail.clientWidth, behavior: reduced.matches ? 'instant' : 'smooth'});
+    prev.addEventListener('click', () => go(active - 1));
+    next.addEventListener('click', () => go(active + 1));
+    rail.addEventListener('scroll', () => requestAnimationFrame(update), {passive:true});
+    rail.addEventListener('keydown', e => {
+      if (!['ArrowLeft','ArrowRight'].includes(e.key)) return;
+      e.preventDefault(); go(active + (e.key === 'ArrowRight' ? 1 : -1));
     });
-    updateRail();
+    window.addEventListener('resize', update);
+    update();
   }
 
   const openModal = opener => { modalOpener = opener || document.activeElement; modal.showModal(); };
@@ -132,53 +135,7 @@
   });
   modal.addEventListener('close', () => {
     if (modalOpener?.isConnected) modalOpener.focus({ preventScroll: true });
-    if (new URL(location.href).searchParams.has('article')) {
-      const url = new URL(location.href); url.searchParams.delete('article'); history.replaceState(null, '', url);
-    }
   });
-  const articles = JSON.parse(document.querySelector('#article-data').textContent);
-  function showArticle(id, opener) {
-    const article = articles.find(a => a.id === id); if (!article) return;
-    content.replaceChildren();
-    const status = document.createElement('span'); status.className = 'draft'; status.textContent = t('首发内容草案 · 待正式发布', 'EDITORIAL DRAFT · NOT YET PUBLISHED');
-    const title = document.createElement('h2'); title.id = 'modal-title'; title.textContent = article.title;
-    const body = document.createElement('div'); body.className = 'article-body';
-    article.body.forEach(text => { const p = document.createElement('p'); p.textContent = text; body.append(p); });
-    const link = document.createElement('a'); link.className = 'text-link'; link.href = 'contact.html'; link.textContent = t('与我们交流 →', 'Talk with us →');
-    content.append(status, title, body, link); openModal(opener);
-  }
-  document.querySelectorAll('[data-article]').forEach(link => link.addEventListener('click', e => {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    e.preventDefault(); showArticle(link.dataset.article, link);
-    const url = new URL(location.href); url.searchParams.set('article', link.dataset.article); history.replaceState(null, '', url);
-  }));
-  const requestedArticle = new URL(location.href).searchParams.get('article');
-  if (requestedArticle) showArticle(requestedArticle);
-
-  const newsList = document.querySelector('#news-list');
-  if (newsList) {
-    let category = '-1', page = 1;
-    const pageSize = 10;
-    const cards = [...newsList.querySelectorAll('.news-card')];
-    function updateNews() {
-      const matches = cards.filter(card => category === '-1' || card.dataset.category === category);
-      const pages = Math.max(1, Math.ceil(matches.length / pageSize)); page = Math.min(page, pages);
-      const visible = matches.slice((page - 1) * pageSize, page * pageSize);
-      cards.forEach(card => { card.hidden = !visible.includes(card); if (!card.hidden) card.classList.add('visible'); });
-      document.querySelector('#result-count').textContent = t(`共 ${matches.length} 篇内容 · 每页最多 10 篇`, `${matches.length} article${matches.length === 1 ? '' : 's'} · Up to 10 per page`);
-      document.querySelector('#page-count').textContent = `${page} / ${pages}`;
-      document.querySelector('#prev-page').disabled = page === 1;
-      document.querySelector('#next-page').disabled = page === pages;
-    }
-    document.querySelectorAll('[data-filter]').forEach(btn => btn.addEventListener('click', () => {
-      category = btn.dataset.filter; page = 1;
-      document.querySelectorAll('[data-filter]').forEach(b => b.setAttribute('aria-pressed', String(b === btn))); updateNews();
-    }));
-    document.querySelector('#prev-page').addEventListener('click', () => { page--; updateNews(); });
-    document.querySelector('#next-page').addEventListener('click', () => { page++; updateNews(); });
-    updateNews();
-  }
-
   const form = document.querySelector('#contact-form');
   if (form) {
     const type = new URL(location.href).searchParams.get('type');
