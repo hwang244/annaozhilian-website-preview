@@ -171,3 +171,85 @@ body[data-page=news] .site-footer p,body[data-page=news] .site-footer .footer-li
   .story-slide,.story-slide-inner{min-height:680px}
 }
 @media(prefers-reduced-motion:reduce){.story-rail{scroll-behavior:auto}}
+
+/* October 11: larger type and image-led product / model views. */
+@media(min-width:1600px){
+  .header-inner{width:min(1380px,calc(100% - 180px))}
+}
+.main-nav a{font-size:15px;font-weight:700}
+.language{font-size:13px}
+.header-actions .button.small{min-height:43px;font-size:13px;font-weight:700}
+.button{font-size:14px}
+.eyebrow{font-size:11px;font-weight:700}
+.hero .eyebrow{font-size:12px}
+.hero-lead{font-size:21px;font-weight:650;line-height:1.55}
+.hero-copy .section-desc{max-width:520px;font-size:16px;line-height:1.8;color:#c7d3e2}
+.hero-tags{font-size:12px;color:#b9cee0}
+.section-desc{font-size:16px;line-height:1.75}
+.text-link{font-size:14px;font-weight:650}
+.value-item p,.product-copy p{font-size:14px;line-height:1.7}
+.tech-row h3{font-size:18px}
+.tech-row p{font-size:13px;line-height:1.6}
+.detail-copy>p,.feature-list li{font-size:15px}
+
+.product-card{border:0;border-radius:4px;box-shadow:0 12px 36px #0002}
+.product-art-photo{height:auto;aspect-ratio:16/9;padding:0;display:block;border:0;background:#0a2033}
+.product-art-photo img{width:100%;height:100%;object-fit:contain;filter:none}
+.product-copy h3{font-size:26px}
+.product-copy{padding:26px 27px 25px}
+
+.tech-model-media,.model-showcase-image{display:block;position:relative;overflow:hidden;background:#081627;text-decoration:none}
+.tech-model-media{aspect-ratio:16/9;margin:0;box-shadow:0 22px 48px #0004}
+.tech-model-media img{width:100%;height:100%;object-fit:contain;filter:saturate(.9) contrast(1.04)}
+.tech-model-media span,.model-showcase-image span{position:absolute;right:18px;bottom:16px;padding:8px 11px;background:#071b2bc9;color:#d9f2ff;font-size:12px;font-weight:700;letter-spacing:.03em}
+.tech-grid{grid-template-columns:1.04fr .96fr;gap:54px;align-items:center}
+
+body[data-page=product] .photo-visual,body[data-page=tech] .photo-visual{aspect-ratio:16/9;min-height:0;height:auto;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;display:block}
+body[data-page=product] .photo-visual img,body[data-page=tech] .photo-visual img{position:static;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;filter:saturate(.88) contrast(1.03)}
+body[data-page=product] .photo-visual:after,body[data-page=tech] .photo-visual:after,body[data-page=tech] .photo-visual:before{content:none;display:none}
+
+.training-gallery{gap:18px;margin-top:28px}
+.training-gallery figure{height:auto;aspect-ratio:auto;border:0;border-radius:0;overflow:visible;background:transparent}
+.training-gallery figure:after{content:none;display:none}
+.training-gallery img{height:auto;aspect-ratio:16/9;object-fit:contain;filter:saturate(.88)}
+.training-gallery figure:hover img{transform:none}
+.training-gallery figcaption{position:static;display:flex;margin:0;padding:13px 2px 0;background:none;color:#d9e8f2}
+.market-photo img{object-fit:contain;object-position:center}
+
+.model-showcase{padding:90px 0 100px;background:#1c193e;border-bottom:1px solid #ffffff1f}
+.model-showcase-head{display:grid;grid-template-columns:1.1fr .9fr;align-items:end;gap:32px;margin-bottom:28px}
+.model-showcase-head .eyebrow{grid-column:1/-1;margin:0}
+.model-showcase-head h2{font-size:clamp(32px,3.2vw,48px);font-weight:750;line-height:1.35}
+.model-showcase-head>p:last-child{color:#d4cfe8;font-size:16px;line-height:1.7}
+.model-showcase-image{width:100%;aspect-ratio:16/9;box-shadow:0 24px 60px #0004}
+.model-showcase-image img{width:100%;height:100%;object-fit:contain}
+
+@media(max-width:1200px){
+  .main-nav a{font-size:14px}
+}
+@media(max-width:1000px){
+  .main-nav a{font-size:13px}
+  .tech-grid{gap:28px}
+}
+@media(max-width:760px){
+  .main-nav a{font-size:17px}
+  .hero .eyebrow{font-size:9px}
+  .hero h1{font-size:clamp(37px,9.8vw,48px)}
+  .hero-lead{font-size:17px;margin-top:19px}
+  .hero-copy .section-desc{font-size:14px;line-height:1.75}
+  .hero-tags{font-size:10px}
+  .section-desc{font-size:14px}
+  .tech-grid{grid-template-columns:1fr;gap:24px}
+  .tech-model-media{aspect-ratio:16/9}
+  .tech-row h3{font-size:17px}
+  .tech-row p{font-size:12px}
+  .training-gallery{grid-template-columns:1fr;gap:25px}
+  .training-gallery figure:last-child{grid-column:auto}
+  .training-gallery figcaption{display:flex}
+  body[data-page=product] .photo-visual,body[data-page=tech] .photo-visual{min-height:0}
+  .model-showcase{padding:55px 0 65px}
+  .model-showcase-head{display:block;margin-bottom:21px}
+  .model-showcase-head h2{font-size:29px}
+  .model-showcase-head>p:last-child{font-size:14px;margin-top:12px}
+  .model-showcase-image span,.tech-model-media span{right:10px;bottom:10px;font-size:10px;padding:6px 8px}
+}
