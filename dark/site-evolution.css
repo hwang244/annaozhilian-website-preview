@@ -271,9 +271,9 @@ body[data-page=tech] .page-hero--tech .tech-path a:hover,body[data-page=tech] .p
 .story-dot:before{content:"";display:block;width:9px;height:9px;border:1.5px solid #a6c9db;border-radius:50%;transition:background .2s,border-color .2s,box-shadow .2s,transform .2s}
 .story-dot:hover:before,.story-dot:focus-visible:before{border-color:#75def9;transform:scale(1.25)}
 .story-dot[aria-current=true]:before{background:#7be1fa;border-color:#7be1fa;box-shadow:0 0 0 5px #7be1fa30}
-.story-button{position:absolute;z-index:5;top:calc(50% - 65px);width:64px;height:64px;padding:0;display:grid;place-items:center;border:0;background:transparent;color:#f1fbff;filter:drop-shadow(0 2px 10px #061423);transition:color .2s,transform .2s}
-.story-button--prev{left:max(16px,calc((100vw - 1500px)/2))}
-.story-button--next{right:max(16px,calc((100vw - 1500px)/2))}
+.story-button{position:absolute;z-index:5;top:calc(50% - 65px);width:64px;height:64px;padding:0;display:grid;place-items:center;border:0;background:transparent;color:#f1fbff;filter:drop-shadow(0 0 3px #00172d) drop-shadow(0 0 12px #00172d);transition:color .2s,transform .2s}
+.story-button--prev{left:clamp(16px,3vw,56px)}
+.story-button--next{right:clamp(16px,3vw,56px)}
 .story-button svg{width:28px;height:42px}
 .story-button:hover:not(:disabled){background:none;border:0;color:#7be1fa;transform:scale(1.16)}
 .story-count,.story-hint{display:none}
