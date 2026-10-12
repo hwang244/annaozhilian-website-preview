@@ -253,3 +253,49 @@ body[data-page=product] .photo-visual:after,body[data-page=tech] .photo-visual:a
   .model-showcase-head>p:last-child{font-size:14px;margin-top:12px}
   .model-showcase-image span,.tech-model-media span{right:10px;bottom:10px;font-size:10px;padding:6px 8px}
 }
+
+/* A connected technology path replaces four boxed hero links. */
+.page-hero--tech .tech-path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;max-width:740px;margin-top:43px;position:relative}
+.page-hero--tech .tech-path:before{content:"";position:absolute;top:5px;left:4px;right:calc(25% - 5px);height:1px;background:linear-gradient(90deg,#7bdafa,#78a5c8 70%,#9a8acb)}
+body[data-page=tech] .page-hero--tech .tech-path a{position:relative;min-height:90px;padding:25px 14px 0 0;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:7px;border:0;background:transparent;color:#f4f4ff;transform:none;line-height:1.3}
+.page-hero--tech .tech-path a:before{content:"";position:absolute;top:0;left:0;width:11px;height:11px;border:2px solid #8adcf1;border-radius:50%;background:#271a49;box-shadow:0 0 0 5px #86dfff19}
+body[data-page=tech] .page-hero--tech .tech-path a:hover,body[data-page=tech] .page-hero--tech .tech-path a:focus-visible{border:0;background:transparent;color:#fff;transform:none}
+.page-hero--tech .tech-path a:hover:before,.page-hero--tech .tech-path a:focus-visible:before{background:#9aeafc;box-shadow:0 0 0 7px #9aeafc24,0 0 20px #9aeafc80}
+.tech-path-number{font-size:10px;font-weight:750;letter-spacing:2px;color:#89d7eb}
+.tech-path-name{font-size:14px;font-weight:750;line-height:1.35}
+
+/* Bare chevrons flank the carousel; circular indicators sit underneath. */
+.story-shell .story-nav{position:static;display:flex;align-items:center;justify-content:center;width:100%;height:66px;min-height:0;margin:0;padding:0;background:#0c2139;border-top:1px solid #ffffff18}
+.story-dots{display:flex;align-items:center;justify-content:center;gap:14px}
+.story-dot{width:28px;height:28px;padding:0;display:grid;place-items:center;background:none;border:0}
+.story-dot:before{content:"";display:block;width:9px;height:9px;border:1.5px solid #a6c9db;border-radius:50%;transition:background .2s,border-color .2s,box-shadow .2s,transform .2s}
+.story-dot:hover:before,.story-dot:focus-visible:before{border-color:#75def9;transform:scale(1.25)}
+.story-dot[aria-current=true]:before{background:#7be1fa;border-color:#7be1fa;box-shadow:0 0 0 5px #7be1fa30}
+.story-button{position:absolute;z-index:5;top:calc(50% - 65px);width:64px;height:64px;padding:0;display:grid;place-items:center;border:0;background:transparent;color:#f1fbff;filter:drop-shadow(0 2px 10px #061423);transition:color .2s,transform .2s}
+.story-button--prev{left:max(16px,calc((100vw - 1500px)/2))}
+.story-button--next{right:max(16px,calc((100vw - 1500px)/2))}
+.story-button svg{width:28px;height:42px}
+.story-button:hover:not(:disabled){background:none;border:0;color:#7be1fa;transform:scale(1.16)}
+.story-count,.story-hint{display:none}
+@media(max-width:1000px){
+  .page-hero--tech .tech-path{max-width:620px}
+  .tech-path-name{font-size:12px}
+}
+@media(max-width:760px){
+  .page-hero--tech .tech-path{display:grid;grid-template-columns:1fr;gap:0;max-width:none;margin-top:28px;padding-left:0}
+  .page-hero--tech .tech-path:before{left:5px;right:auto;top:5px;bottom:23px;width:1px;height:auto;background:linear-gradient(#7bdafa,#9a8acb)}
+  body[data-page=tech] .page-hero--tech .tech-path a{min-height:56px;padding:6px 0 6px 28px;display:grid;grid-template-columns:28px 1fr;align-items:center;justify-content:start;gap:8px}
+  .page-hero--tech .tech-path a:before{top:21px;left:0}
+  .tech-path-name{font-size:14px}
+  .story-shell .story-nav{height:54px}
+  .story-button{top:calc(28vw - 26px);width:44px;height:52px}
+  .story-button--prev{left:8px}
+  .story-button--next{right:8px}
+  .story-button svg{width:23px;height:32px}
+  .story-dots{gap:11px}
+  .story-slide{min-height:0}
+  .story-slide-photo{position:relative;inset:auto;aspect-ratio:1600/899}
+  .story-slide-photo img{object-fit:contain;filter:saturate(.8) contrast(1.06) brightness(.9)}
+  .story-slide-photo:after{background:linear-gradient(0deg,#0c213954,transparent 26%)}
+  .story-slide-inner{min-height:0;padding-top:27px;padding-bottom:32px;align-items:flex-start}
+}

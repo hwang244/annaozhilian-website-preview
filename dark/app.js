@@ -106,17 +106,16 @@
     const slides = [...rail.querySelectorAll('.story-slide')];
     const prev = shell.querySelector('[data-story-prev]');
     const next = shell.querySelector('[data-story-next]');
-    const count = shell.querySelector('.story-count');
+    const dots = [...shell.querySelectorAll('[data-story-dot]')];
     let active = 0;
     const update = () => {
       active = Math.max(0, Math.min(slides.length - 1, Math.round(rail.scrollLeft / Math.max(rail.clientWidth, 1))));
-      count.textContent = `${String(active + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
-      prev.disabled = active === 0;
-      next.disabled = active === slides.length - 1;
+      dots.forEach((dot, index) => dot.setAttribute('aria-current', String(index === active)));
     };
-    const go = index => rail.scrollTo({left: Math.max(0, Math.min(slides.length - 1, index)) * rail.clientWidth, behavior: reduced.matches ? 'instant' : 'smooth'});
+    const go = index => rail.scrollTo({left: ((index % slides.length) + slides.length) % slides.length * rail.clientWidth, behavior: reduced.matches ? 'instant' : 'smooth'});
     prev.addEventListener('click', () => go(active - 1));
     next.addEventListener('click', () => go(active + 1));
+    dots.forEach((dot, index) => dot.addEventListener('click', () => go(index)));
     rail.addEventListener('scroll', () => requestAnimationFrame(update), {passive:true});
     rail.addEventListener('keydown', e => {
       if (!['ArrowLeft','ArrowRight'].includes(e.key)) return;
