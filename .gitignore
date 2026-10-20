@@ -4,6 +4,9 @@
 *.png
 !dark/assets/rehabilitation-logo.png
 !white/assets/rehabilitation-logo.png
+!dark/assets/logo-emblem-white.png
+!dark/assets/logo-emblem-blue.png
+!white/assets/logo-emblem-blue.png
 *.zip
 research/
 qa/
