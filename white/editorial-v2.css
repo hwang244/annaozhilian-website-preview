@@ -84,3 +84,22 @@ html[lang=en] .brand-word{font-family:Arial,sans-serif;letter-spacing:-.015em!im
   .footer-main .brand-lockup{width:82px}
   .main-nav,html[lang=en] .main-nav{padding-left:22px;padding-right:22px}
 }
+
+/* Transparent symbol and compact bilingual wordmark for light surfaces. */
+.brand{gap:11px}
+.brand-emblem{display:block;width:43px;height:43px;flex:none}
+.brand-emblem img{display:block;width:100%;height:100%;object-fit:contain}
+.brand-type{display:flex;flex-direction:column;justify-content:center;gap:5px;min-width:0}
+.brand-type .brand-word,html[lang=en] .brand-type .brand-word,.footer-main .brand-type .brand-word{display:block;color:#153c79;font-size:21px!important;font-weight:800;letter-spacing:.035em!important;line-height:1.05}
+.brand-signature{display:block;color:#537ca7;font-family:Arial,sans-serif;font-size:8px;font-weight:750;letter-spacing:.17em;line-height:1;white-space:nowrap}
+html[lang=en] .brand-type .brand-word{font-family:Arial,sans-serif;font-size:20px!important;letter-spacing:.005em!important}
+.footer-main .brand-emblem{width:39px;height:39px}
+.footer-main .brand-type .brand-word{font-size:19px!important}
+@media(max-width:760px){
+  .brand{gap:8px}
+  .brand-emblem{width:35px;height:35px}
+  .brand-type{gap:4px}
+  .brand-type .brand-word,html[lang=en] .brand-type .brand-word{font-size:17px!important}
+  .brand-signature{font-size:6px;letter-spacing:.12em}
+  .footer-main .brand-emblem{width:35px;height:35px}
+}
