@@ -299,3 +299,83 @@ body[data-page=tech] .page-hero--tech .tech-path a:hover,body[data-page=tech] .p
   .story-slide-photo:after{background:linear-gradient(0deg,#0c213954,transparent 26%)}
   .story-slide-inner{min-height:0;padding-top:27px;padding-bottom:32px;align-items:flex-start}
 }
+
+/* The supplied REHABILITATION artwork and a readable bilingual brand lockup. */
+.header-inner{width:min(1240px,calc(100% - 144px))}
+@media(min-width:1600px){.header-inner{width:min(1380px,calc(100% - 180px))}}
+.brand{gap:13px}
+.brand-lockup{display:block;width:112px;height:auto;aspect-ratio:1108/588;object-fit:contain;flex:none;border-radius:4px}
+.brand-word,html[lang=en] .brand-word,.footer-main .brand-word{font-size:22px!important;font-weight:800;letter-spacing:.025em!important}
+html[lang=en] .brand-word{font-family:Arial,sans-serif;letter-spacing:-.015em!important}
+.footer-main .brand-lockup{width:98px}
+.brand-logo-panel{display:block;padding:0;aspect-ratio:1108/588;overflow:hidden;border:0;border-radius:6px;background:#1264cf}
+.brand-logo-panel .brand-full-logo{display:block;width:100%;height:100%;max-width:none;object-fit:cover}
+
+/* Larger navigation and body copy without shrinking the content area. */
+.main-nav{gap:25px}
+.main-nav a,html[lang=en] .main-nav a{font-size:17px;font-weight:700}
+.hero-lead{font-size:22px}
+.hero-copy .section-desc,.section-desc{font-size:17px;line-height:1.75}
+.value-item p,.product-copy p,.tech-row p{font-size:15px;line-height:1.75}
+.detail-copy>p,.feature-list li,.story-slide p{font-size:16px;line-height:1.75}
+.page-hero .section-desc{font-size:17px}
+.page-hero .subnav a{font-size:14px}
+
+/* Product and technology now use the homepage navy and cyan palette. */
+body[data-page=product],body[data-page=tech]{background:#0a0e1a}
+body[data-page=product] .site-header,body[data-page=tech] .site-header{background:#0a0e1af5;border-bottom-color:#ffffff20}
+body[data-page=product] .main-nav a,body[data-page=tech] .main-nav a{color:#adbacd}
+body[data-page=product] .main-nav a:hover,body[data-page=tech] .main-nav a:hover,
+body[data-page=product] .main-nav a[aria-current=page],body[data-page=tech] .main-nav a[aria-current=page]{color:#fff}
+body[data-page=product] .main-nav a[aria-current=page]:after,body[data-page=tech] .main-nav a[aria-current=page]:after{background:#61d3f5}
+body[data-page=product] .header-actions .button,body[data-page=tech] .header-actions .button{background:#61d3f5;border-color:#61d3f5;color:#071426}
+body[data-page=product] .header-actions .button:hover,body[data-page=tech] .header-actions .button:hover{background:#91e2f9}
+body[data-page=product] .language,body[data-page=tech] .language{color:#a4afc0}
+body[data-page=product] .language b,body[data-page=tech] .language b{color:#fff}
+body[data-page=product] .page-hero--product,body[data-page=tech] .page-hero--tech{--page-accent:#61d3f5;background:#0b1628;border-bottom-color:#29445c}
+body[data-page=product] .page-hero--product .page-hero-image:after{background:linear-gradient(90deg,#0b1628 0%,#0b1628f2 18%,#0b16289b 59%,#0b162845),linear-gradient(0deg,#091323d8,transparent 60%)}
+body[data-page=tech] .page-hero--tech .page-hero-image:after{background:linear-gradient(180deg,#0b1628 0%,transparent 27%),linear-gradient(90deg,#0b1628 0%,#0b1628ef 18%,#0b162891 65%,#0b16284c),linear-gradient(0deg,#0b1628e8,transparent 60%)}
+body[data-page=product] .page-hero-side,body[data-page=tech] .page-hero-side{background:#071626d9;border-color:#61d3f5}
+body[data-page=product] .page-hero .subnav a,body[data-page=tech] .page-hero .subnav a{border-color:#5b8ca886;background:#09273dbd;color:#e6f6fc}
+body[data-page=product] .page-hero .subnav a:hover,body[data-page=tech] .page-hero .subnav a:hover{background:#154561;border-color:#61d3f5}
+body[data-page=product] #patient{background:#0c1b2b}
+body[data-page=product] #expert{background:#101d30}
+body[data-page=product] #organization{background:#0d1727}
+body[data-page=tech] .content-section{background:#0a1526}
+body[data-page=tech] .content-section:nth-of-type(odd){background:#101d30}
+body[data-page=product] .photo-visual,body[data-page=tech] .photo-visual{border-color:#3a5d76}
+body[data-page=product] .site-footer,body[data-page=tech] .site-footer{background:#0a0e1a}
+body[data-page=tech] .model-showcase{background:#0d1c30;border-bottom-color:#ffffff20}
+body[data-page=tech] .model-showcase-head>p:last-child{color:#c7d8e8}
+.page-hero--tech .tech-path a:before{background:#0b1628}
+
+/* Let the browser scroll naturally; keep the carousel's horizontal snap only. */
+html.is-home{scroll-snap-type:none!important}
+.screen{scroll-snap-align:none}
+.site-header,.page-hero-side{backdrop-filter:none}
+.reveal,.motion-ready .reveal,.motion-ready .reveal.visible{opacity:1;transform:none;transition:none}
+
+@media(max-width:1200px){
+  .header-inner{width:calc(100% - 110px)}
+  .main-nav a,html[lang=en] .main-nav a{font-size:16px}
+}
+@media(max-width:1100px){
+  .main-nav,html[lang=en] .main-nav{position:fixed;top:var(--header);left:0;right:0;height:auto;display:none;flex-direction:column;align-items:stretch;gap:0;padding:15px 44px 28px;background:#0d1525;border-bottom:1px solid #344960}
+  .menu-open .main-nav,html[lang=en] .menu-open .main-nav{display:flex}
+  .main-nav a,html[lang=en] .main-nav a{height:auto;padding:18px 0;border-bottom:1px solid var(--line);font-size:18px}
+  .menu-toggle{display:block}
+  body[data-page=news] .main-nav{background:#fff}
+}
+@media(max-width:1000px){
+  .header-inner{width:calc(100% - 88px)}
+  .main-nav,html[lang=en] .main-nav{padding-left:44px;padding-right:44px}
+}
+@media(max-width:760px){
+  .header-inner{width:calc(100% - 44px)}
+  .brand-lockup{width:72px}
+  .brand-word,html[lang=en] .brand-word{font-size:17px!important}
+  .footer-main .brand-lockup{width:82px}
+  .main-nav,html[lang=en] .main-nav{padding-left:22px;padding-right:22px}
+  .hero-copy .section-desc,.section-desc,.page-hero .section-desc{font-size:15px}
+  .detail-copy>p,.feature-list li{font-size:15px}
+}

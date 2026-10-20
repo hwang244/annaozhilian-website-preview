@@ -2,6 +2,8 @@
 *.docx
 *.pdf
 *.png
+!dark/assets/rehabilitation-logo.png
+!white/assets/rehabilitation-logo.png
 *.zip
 research/
 qa/

@@ -47,3 +47,38 @@ html[lang=en] .brand-word small{font-size:7px!important;letter-spacing:.45px!imp
 @media(max-width:1200px){.header-inner{width:calc(100% - 88px)}}
 @media(max-width:1000px){.header-inner{width:calc(100% - 72px)}}
 @media(max-width:760px){.header-inner{width:calc(100% - 44px)}.brand-word,html[lang=en] .brand-word{font-size:18px!important}}
+
+/* Supplied complete logo, paired with the company name in each language. */
+.header-inner{width:min(1280px,calc(100% - 112px))}
+.brand{gap:13px}
+.brand-lockup{display:block;width:112px;height:auto;aspect-ratio:1108/588;object-fit:contain;flex:none;border-radius:4px}
+.brand-word,html[lang=en] .brand-word{font-size:22px!important;font-weight:800;letter-spacing:.025em!important}
+html[lang=en] .brand-word{font-family:Arial,sans-serif;letter-spacing:-.015em!important}
+.footer-main .brand-lockup{width:98px}
+.brand-logo-panel{display:block;padding:0;aspect-ratio:1108/588;overflow:hidden;border:0;border-radius:6px;background:#1264cf}
+.brand-logo-panel .brand-full-logo{display:block;width:100%;height:100%;max-width:none;object-fit:cover}
+.main-nav{gap:25px}
+.main-nav a,html[lang=en] .main-nav a{font-size:17px;font-weight:700}
+.site-header{backdrop-filter:none;background:#fffffff7}
+.reveal,.motion-ready .reveal,.motion-ready .reveal.visible{opacity:1;transform:none;transition:none}
+@media(max-width:1200px){
+  .header-inner{width:calc(100% - 88px)}
+  .main-nav a,html[lang=en] .main-nav a{font-size:16px}
+}
+@media(max-width:1100px){
+  .main-nav,html[lang=en] .main-nav{position:fixed;top:var(--header);left:0;right:0;height:auto;display:none;flex-direction:column;align-items:stretch;gap:0;padding:15px 44px 28px;background:#fff;border-bottom:1px solid #ccdbee}
+  .menu-open .main-nav,html[lang=en] .menu-open .main-nav{display:flex}
+  .main-nav a,html[lang=en] .main-nav a{height:auto;padding:18px 0;border-bottom:1px solid var(--line);font-size:18px}
+  .menu-toggle{display:block}
+}
+@media(max-width:1000px){
+  .header-inner{width:calc(100% - 88px)}
+  .main-nav,html[lang=en] .main-nav{padding-left:44px;padding-right:44px}
+}
+@media(max-width:760px){
+  .header-inner{width:calc(100% - 44px)}
+  .brand-lockup{width:72px}
+  .brand-word,html[lang=en] .brand-word{font-size:17px!important}
+  .footer-main .brand-lockup{width:82px}
+  .main-nav,html[lang=en] .main-nav{padding-left:22px;padding-right:22px}
+}

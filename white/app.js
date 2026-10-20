@@ -24,7 +24,7 @@
       else if (!e.shiftKey && document.activeElement === menu) { e.preventDefault(); items[0].focus(); }
     }
   });
-  window.matchMedia('(max-width: 760px)').addEventListener('change', e => { if (!e.matches) setMenu(false); });
+  window.matchMedia('(max-width: 1100px)').addEventListener('change', e => { if (!e.matches) setMenu(false); });
 
 
   const solutionTabs = [...document.querySelectorAll('[data-solution]')];
@@ -95,30 +95,7 @@
       e.preventDefault(); goToScreen(i); history.replaceState(null, '', dot.hash);
     }));
     document.querySelector('.scroll-cue')?.addEventListener('click', e => { e.preventDefault(); goToScreen(1); });
-    document.addEventListener('keydown', e => {
-      if (modal.open || document.body.classList.contains('menu-open') || /INPUT|TEXTAREA|SELECT|BUTTON/.test(e.target.tagName) || e.target.isContentEditable || e.altKey || e.ctrlKey || e.metaKey) return;
-      if (!presentation || window.innerWidth < 1101 || window.innerHeight < 700) return;
-      const next = ['ArrowDown', 'PageDown'].includes(e.key);
-      const prev = ['ArrowUp', 'PageUp'].includes(e.key);
-      if (!next && !prev && e.key !== 'Home' && e.key !== 'End') return;
-      if (screens[currentScreen].offsetHeight > innerHeight + 8 && (next || prev)) return;
-      e.preventDefault();
-      goToScreen(e.key === 'Home' ? 0 : e.key === 'End' ? screens.length - 1 : currentScreen + (next ? 1 : -1));
-    });
-    let wheelLock = 0, wheelTotal = 0;
-    window.addEventListener('wheel', e => {
-      if (!presentation || innerWidth < 1101 || innerHeight < 700 || reduced.matches || modal.open || document.body.classList.contains('menu-open') || e.ctrlKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-      const section = screens[currentScreen];
-      if (section.offsetHeight > innerHeight + 8) return;
-      if ((currentScreen === 0 && e.deltaY < 0) || (currentScreen === screens.length - 1 && e.deltaY > 0)) return;
-      e.preventDefault();
-      const now = performance.now();
-      if (now < wheelLock) return;
-      wheelTotal += e.deltaY * (e.deltaMode === 1 ? 20 : 1);
-      if (Math.abs(wheelTotal) < 24) return;
-      goToScreen(currentScreen + (wheelTotal > 0 ? 1 : -1));
-      wheelTotal = 0; wheelLock = now + 950;
-    }, { passive: false });
+    // Keep normal document scrolling even when presentation mode is enabled.
     window.addEventListener('resize', nearestScreen);
     nearestScreen();
   }
