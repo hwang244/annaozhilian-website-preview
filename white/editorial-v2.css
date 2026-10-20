@@ -41,3 +41,9 @@ html[lang=en] .brand-word small{font-size:7px!important;letter-spacing:.45px!imp
 .brand-reference-card .brand-company-en{font-size:14px!important;color:#245fe5!important;font-weight:700;margin-top:14px;line-height:1.5}
 @media(max-width:1000px){.brand-reference-card{gap:35px}.brand-reference-card h2{font-size:29px}}
 @media(max-width:760px){.brand-symbol{padding:4px}.brand-word,html[lang=en] .brand-word{font-size:13px!important}.brand-word small{font-size:8px!important}html[lang=en] .brand-word small{font-size:6px!important}.brand-reference-section{padding:43px 0}.brand-reference-card{grid-template-columns:1fr;gap:28px}.brand-reference-card h2{font-size:26px}.brand-reference-card p:not(.eyebrow){font-size:14px}}
+.header-inner{width:min(1280px,calc(100% - 112px))}
+.brand-word,html[lang=en] .brand-word{font-size:21px!important;letter-spacing:.02em!important}
+.footer-main .brand-word{font-size:19px!important}
+@media(max-width:1200px){.header-inner{width:calc(100% - 88px)}}
+@media(max-width:1000px){.header-inner{width:calc(100% - 72px)}}
+@media(max-width:760px){.header-inner{width:calc(100% - 44px)}.brand-word,html[lang=en] .brand-word{font-size:18px!important}}

@@ -140,12 +140,11 @@
   function showArticle(id, opener) {
     const article = articles.find(a => a.id === id); if (!article) return;
     content.replaceChildren();
-    const status = document.createElement('span'); status.className = 'draft'; status.textContent = t('首发内容草案 · 待正式发布', 'EDITORIAL DRAFT · NOT YET PUBLISHED');
     const title = document.createElement('h2'); title.id = 'modal-title'; title.textContent = article.title;
     const body = document.createElement('div'); body.className = 'article-body';
     article.body.forEach(text => { const p = document.createElement('p'); p.textContent = text; body.append(p); });
     const link = document.createElement('a'); link.className = 'text-link'; link.href = 'contact.html'; link.textContent = t('与我们交流 →', 'Talk with us →');
-    content.append(status, title, body, link); openModal(opener);
+    content.append(title, body, link); openModal(opener);
   }
   document.querySelectorAll('[data-article]').forEach(link => link.addEventListener('click', e => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
