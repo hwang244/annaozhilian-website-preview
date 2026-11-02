@@ -14,7 +14,7 @@ if(['a','b'].includes(option)&&(/\.github\.io$/.test(location.hostname)||['127.0
     document.title=`${option.toUpperCase()} / 选项 ${option==='a'?'1':'2'} · 首页方案 · 安脑智联`;
     const frame=document.createElement('iframe');frame.className='brain-preview-frame';frame.title=`${option.toUpperCase()} 首页三维大脑，可拖动旋转`;frame.loading='eager';
     const strip=document.createElement('aside');strip.className='brain-preview-strip';strip.setAttribute('aria-label','首页三维方案预览');
-    strip.innerHTML=`<strong>${option.toUpperCase()} / 选项 ${option==='a'?'1':'2'}</strong><nav aria-label="切换首页方案"><a href="?brain=a" ${option==='a'?'aria-current="page"':''}>A 首页</a><a href="?brain=b" ${option==='b'?'aria-current="page"':''}>B 首页</a><a href="../experiments/brain-comparison/">并排对比 ↗</a><a href="index.html">静态原版</a></nav><span class="brain-preview-status" role="status">正在加载 3D，先显示原图…</span><a class="brain-preview-credit" href="../experiments/textured-brain/MODEL-ATTRIBUTION.md" target="_blank" rel="noopener">BodyParts3D · CC BY 4.0</a>`;
+    strip.innerHTML=`<strong>${option.toUpperCase()} / 选项 ${option==='a'?'1':'2'}</strong><nav aria-label="切换首页方案"><a href="?brain=a&v=compact3" ${option==='a'?'aria-current="page"':''}>A 首页</a><a href="?brain=b&v=compact3" ${option==='b'?'aria-current="page"':''}>B 首页</a><a href="../experiments/brain-comparison/">并排对比 ↗</a><a href="index.html">静态原版</a></nav><span class="brain-preview-status" role="status">正在加载 3D，先显示原图…</span><a class="brain-preview-credit" href="../experiments/textured-brain/MODEL-ATTRIBUTION.md" target="_blank" rel="noopener">BodyParts3D · CC BY 4.0</a>`;
     document.body.append(strip);
     window.addEventListener('message',event=>{
       if(event.origin!==location.origin||event.source!==frame.contentWindow)return;
@@ -29,7 +29,7 @@ if(['a','b'].includes(option)&&(/\.github\.io$/.test(location.hostname)||['127.0
     });
     // Give text and the original image a paint opportunity before starting the model.
     requestAnimationFrame(()=>requestAnimationFrame(()=>{
-      frame.src=option==='a'?'../experiments/brain-comparison/option-a/?home=1':'../experiments/textured-brain/?embed=1&home=1';art.append(frame);
+      frame.src=option==='a'?'../experiments/brain-comparison/option-a/?home=1&v=compact3':'../experiments/textured-brain/?embed=1&home=1&v=compact3';if(params.has('quality'))frame.src+='&quality='+encodeURIComponent(params.get('quality'));art.append(frame);
     }));
   }
 }

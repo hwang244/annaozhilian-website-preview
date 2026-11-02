@@ -10,6 +10,7 @@ window.addEventListener('message',event=>{
   const status=document.querySelector(`[data-status="${source.dataset.option}"]`);
   if(message?.type==='brain-loading'&&!status.classList.contains('ready'))status.textContent=Number.isFinite(message.percent)?`模型下载中… ${message.percent}%`:'模型下载中…';
   if(message?.type==='brain-error'){status.textContent='模型加载未成功，可刷新重试';status.classList.remove('ready');}
+  if(message?.type==='brain-first-frame'&&source.dataset.option==='b'&&['mobile','desktop'].includes(message.metrics?.quality))document.querySelector('[data-download-b]').href=`../textured-brain/annobrain-neural-${message.metrics.quality}.glb`;
   if(message?.type==='brain-ready') {
     status.textContent='已就绪 · 可拖动旋转';status.classList.add('ready');
     if(sync.checked)send(source,{type:'brain-pose',pose:lastPose});

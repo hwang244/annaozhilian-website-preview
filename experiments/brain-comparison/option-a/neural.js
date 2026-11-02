@@ -1,4 +1,5 @@
-import {reportFirstFrame,reportProgress,reportFailure} from '../../shared/metrics.js?v=2';
+import {decodeNeuralData} from './decode-compact.js';
+import {reportFirstFrame,reportProgress,reportFailure} from '../../shared/metrics.js?v=compact3';
 import * as THREE from 'three';
 import { EffectComposer } from './vendor/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from './vendor/addons/postprocessing/RenderPass.js';
@@ -9,6 +10,8 @@ const stage = document.querySelector('.neural-stage');
 const loading = document.querySelector('.loading-note');
 const tools = document.querySelector('.viewer-tools');
 const startAngle = -1.02;
+const originalQuality=new URLSearchParams(location.search).get('quality')==='original';
+const modelFile=originalQuality?'brain.bin.gz':'brain-compact-v2.bin.gz';
 let referenceMode = false;
 let repaint = () => {};
 
@@ -36,17 +39,27 @@ init().catch(error => {
 
 async function init() {
   const [metadata, binary] = await Promise.all([
-    fetch('./brain.json').then(r => { if (!r.ok) throw Error('Model metadata'); return r.json(); }),
-    fetch('./brain.bin.gz').then(r => {
+    fetch(originalQuality?'./brain.json':'./brain-compact-v2.json').then(r => { if (!r.ok) throw Error('Model metadata'); return r.json(); }),
+    fetch('./'+modelFile).then(r => {
       if (!r.ok) throw Error('Model geometry');
-      let loaded=0;const total=Number(r.headers.get('content-length'))||20070126;
+      let loaded=0;const total=Number(r.headers.get('content-length'))||(originalQuality?20070126:1581335);
       const progress=new TransformStream({transform(chunk,controller){loaded+=chunk.byteLength;reportProgress(stage,loaded,total);controller.enqueue(chunk);}});
       return new Response(r.body.pipeThrough(progress).pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
     })
   ]);
-  const data = {};
-  for (const [name, field] of Object.entries(metadata.fields)) {
-    data[name] = new (field.type === 'uint32' ? Uint32Array : Float32Array)(binary,field.offset,field.length);
+  let data={};
+  if(originalQuality){
+    for(const[name,field]of Object.entries(metadata.fields))data[name]=new(field.type==='uint32'?Uint32Array:Float32Array)(binary,field.offset,field.length);
+  }else{
+    data=decodeNeuralData(binary,metadata);
+    const started=performance.now();
+    data=await new Promise((resolve,reject)=>{
+      const worker=new Worker(new URL('./fiber-worker.js',import.meta.url),{type:'module'});
+      worker.onmessage=event=>{worker.terminate();event.data.error?reject(Error(event.data.error)):resolve(event.data.data);};
+      worker.onerror=event=>{worker.terminate();reject(Error(event.message||'Fiber reconstruction'));};
+      worker.postMessage({data,expected:metadata.recipeVertices},[...new Set(Object.values(data).map(a=>a.buffer))]);
+    });
+    stage.dataset.rebuildMs=String(Math.round(performance.now()-started));
   }
   const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
   const ratio = Math.min(window.devicePixelRatio || 1, 2);
@@ -176,7 +189,7 @@ async function init() {
     stage.dataset.angle=String(angle);canvas.setAttribute('aria-valuenow',String(angle));
     stage.dataset.pitch=String(Math.round(brain.rotation.x*180/Math.PI));
     stage.dataset.yaw=String(Math.round(brain.rotation.y*180/Math.PI));
-    composer.render();pending=false;reportFirstFrame(stage,'/brain.bin.gz');
+    composer.render();pending=false;reportFirstFrame(stage,'/'+modelFile);
   }
   function requestRender() { if(!pending) {pending=true;requestAnimationFrame(render);} }
   repaint=requestRender;

@@ -1,4 +1,5 @@
-import {reportFirstFrame,reportProgress,reportFailure} from '../shared/metrics.js?v=2';
+import {MeshoptDecoder} from './vendor/meshopt_decoder.mjs';
+import {reportFirstFrame,reportProgress,reportFailure} from '../shared/metrics.js?v=compact3';
 import * as THREE from 'three';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
 
@@ -6,7 +7,13 @@ const stage=document.querySelector('.neural-stage');
 const status=document.querySelector('.loading-note');
 const tools=document.querySelector('.viewer-tools');
 const presets=document.querySelector('.view-presets');
-const embedded=new URLSearchParams(location.search).has('embed');
+const query=new URLSearchParams(location.search);
+const embedded=query.has('embed');
+const quality=query.get('quality');
+const mobile=quality==='mobile'||(quality!=='desktop'&&quality!=='original'&&(matchMedia('(pointer:coarse)').matches||(parent===window?innerWidth:parent.innerWidth)<768));
+const modelFile=quality==='original'?'annobrain-neural-complete.glb':`annobrain-neural-${mobile?'mobile':'desktop'}.glb`;
+stage.dataset.quality=quality==='original'?'original':mobile?'mobile':'desktop';
+const download=document.querySelector('.download-model');if(download){download.href=modelFile;download.firstChild.textContent='下载当前优化模型 · GLB ';}
 const initial=embedded?{x:.02,y:-1.02,z:-.04}:{x:.12,y:-1.05,z:0};
 let reference=false,redraw=()=>{};
 for(const button of document.querySelectorAll('[data-mode]'))button.addEventListener('click',()=>{
@@ -34,7 +41,7 @@ async function start() {
   const scene=new THREE.Scene();
   const camera=embedded?new THREE.PerspectiveCamera(35,1,.1,30):new THREE.OrthographicCamera(-2,2,2,-2,.1,20);
   camera.position.set(0,embedded ? .12 : 0,embedded ? 6 : 7);camera.lookAt(0,0,0);
-  const model=(await new GLTFLoader().loadAsync(new URL('./annobrain-neural-complete.glb?v=fine1',import.meta.url).href,event=>reportProgress(stage,event.loaded,event.total||54487228))).scene;
+  const model=(await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(new URL('./'+modelFile,import.meta.url).href,event=>reportProgress(stage,event.loaded,event.total||0))).scene;
   model.traverse(node=>{
     if(node.isMesh) {
       node.material.toneMapped=false;
@@ -58,7 +65,7 @@ async function start() {
     stage.dataset.pitch=String(Math.round(model.rotation.x*180/Math.PI));
     stage.dataset.yaw=String(Math.round(model.rotation.y*180/Math.PI));
     canvas.setAttribute('aria-valuetext',`转向 ${Math.round(model.rotation.y*180/Math.PI)}°，俯仰 ${Math.round(model.rotation.x*180/Math.PI)}°`);
-    renderer.render(scene,camera);pending=false;reportFirstFrame(stage,'/annobrain-neural-complete.glb');
+    renderer.render(scene,camera);pending=false;reportFirstFrame(stage,'/'+modelFile);
   };
   redraw=()=>{if(!pending){pending=true;requestAnimationFrame(render);}};
   new ResizeObserver(()=>{

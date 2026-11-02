@@ -4,6 +4,10 @@
 
 模型：[annobrain-neural-complete.glb](annobrain-neural-complete.glb)
 
+当前预览默认使用 Meshopt 网格压缩和 WebP 纹理；手机自动选择 3.65 MB 的轻量模型，
+PC 使用 11.90 MB 的高分辨率纹理模型。原始 54.49 MB GLB 保留作参考，
+不会默认下载。优化细节见 [OPTIMIZATION.md](../brain-comparison/OPTIMIZATION.md)。
+
 当前版本使用双侧大脑半球、小脑和脑干的完整空间结构，替换此前按原图
 前后拼合的曲面。可以拖动旋转、查看上下方向，或使用六个方向按钮。
 默认静止，仅在操作及尺寸变化时绘制。原网站首页仍使用静态图。

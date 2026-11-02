@@ -22,3 +22,5 @@ GitHub Pages 提供两个完整首页入口和并排对比入口。默认首页�
 [MATERIAL-PRODUCTION.md](../textured-brain/MATERIAL-PRODUCTION.md)。
 
 体积和加载测试见 [PERFORMANCE.md](PERFORMANCE.md)。
+
+默认已启用轻量资源与手机自适应，方法、质量取舍和重建命令见 [OPTIMIZATION.md](OPTIMIZATION.md)。

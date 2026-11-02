@@ -1,8 +1,8 @@
 # 安脑智联官网 · GitHub Pages 公开预览包
 
-**3D 大脑首页方案（供评审选择）：** [A / 选项 1 首页](https://hwang244.github.io/annaozhilian-website-preview/dark/index.html?brain=a) · [B / 选项 2 首页](https://hwang244.github.io/annaozhilian-website-preview/dark/index.html?brain=b) · [A / B 并排对比](https://hwang244.github.io/annaozhilian-website-preview/experiments/brain-comparison/)
+**3D 大脑首页方案（供评审选择）：** [A / 选项 1 首页](https://hwang244.github.io/annaozhilian-website-preview/dark/index.html?brain=a&v=compact3) · [B / 选项 2 首页](https://hwang244.github.io/annaozhilian-website-preview/dark/index.html?brain=b&v=compact3) · [A / B 并排对比](https://hwang244.github.io/annaozhilian-website-preview/experiments/brain-comparison/)
 
-模型文件：A **20.07 MB**、B **54.49 MB**。[加载测量、网络情况和测试边界](experiments/brain-comparison/PERFORMANCE.md)。
+当前默认资源：A **1.58 MB**；B 手机 **3.65 MB**、PC **11.90 MB**。原始模型保留作质量参考。[加载测量、网络情况和测试边界](experiments/brain-comparison/PERFORMANCE.md)。
 
 首页先显示正文和原始静态图，模型完成首次绘制后显示可拖动的 3D。性能数据使用 `&metrics=1` 查看，不发送到分析服务。预览仅在 GitHub Pages 和本地启用，Cloudflare 正式站仍显示静态首页。
 
