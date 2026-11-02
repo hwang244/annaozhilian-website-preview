@@ -17,3 +17,13 @@
 #team .partner-types { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); width:100%; margin-top:24px; gap:24px; }
 #team .partner-types > span { display:flex; align-items:center; justify-content:center; padding:20px 8px; border-top:1px solid currentColor; }
 @media(max-width:600px){ #team .partner-types{gap:8px;} #team .partner-types > span{font-size:12px;gap:6px;} }
+
+/* Spread the primary footer navigation across its available width. */
+.site-footer .footer-main{display:grid;grid-template-columns:minmax(220px,.9fr) minmax(0,2fr);column-gap:clamp(32px,5vw,88px);align-items:start}
+.site-footer .footer-links{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0 20px;width:100%;margin:0;font-size:14px;line-height:1.5}
+.site-footer .footer-links a{display:block;min-height:40px;padding:8px 0;white-space:nowrap}
+@media(max-width:767px){
+ .site-footer .footer-main{grid-template-columns:1fr;row-gap:24px}
+ .site-footer .footer-links{column-gap:10px;font-size:12px}
+ html[lang=en] .site-footer .footer-links{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:8px}
+}
