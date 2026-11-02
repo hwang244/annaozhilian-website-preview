@@ -1,0 +1,33 @@
+/* Full-frame platform illustrations and the phone-first hardware roadmap. */
+.platform-intro{display:grid;grid-template-columns:1.25fr 1fr;gap:72px;align-items:end;margin-bottom:36px}
+.platform-intro .detail-copy{max-width:720px}
+.platform-intro .feature-list{margin:0}
+.reference-figure{margin:0;min-width:0}
+.reference-image{display:block;overflow:hidden;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.reference-image img{display:block;width:100%;height:auto;filter:none;transition:opacity .2s}
+.reference-image:hover img{opacity:.94}
+.reference-figure figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:14px;color:var(--muted);font-size:12px;line-height:1.7}
+.reference-figure figcaption a{flex-shrink:0;color:var(--cyan)}
+.reference-figure figcaption a:hover{text-decoration:underline}
+.hardware-section .section-top{margin-bottom:34px}
+.hardware-section .section-desc{max-width:800px;margin-top:22px}
+.hardware-phases{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:36px}
+.hardware-phase{border-top:1px solid var(--line);padding:24px 0 0}
+.hardware-phase .eyebrow{font-size:10px;letter-spacing:.1em;color:var(--cyan);margin-bottom:14px}
+.hardware-phase h3{font-size:24px;line-height:1.5;margin-bottom:10px}
+.hardware-phase>p:last-child{color:var(--muted);font-size:15px;max-width:520px}
+.hardware-gallery-label{font-size:11px;letter-spacing:.1em;color:var(--cyan);margin:0 0 18px}
+.hardware-gallery{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:start}
+@media(max-width:1100px){
+  .platform-intro{gap:36px;grid-template-columns:1.15fr 1fr}
+  .hardware-gallery,.hardware-phases{gap:24px}
+}
+@media(max-width:760px){
+  .platform-intro{grid-template-columns:1fr;gap:24px;margin-bottom:28px}
+  .hardware-phases,.hardware-gallery{grid-template-columns:1fr;gap:28px}
+  .hardware-phase{padding-top:20px}
+  .hardware-phase h3{font-size:21px}
+  .hardware-section .section-desc{margin-top:18px}
+  .reference-image{border-radius:6px}
+  .reference-figure figcaption{font-size:11px;gap:12px;margin-top:10px}
+}

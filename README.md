@@ -16,6 +16,8 @@
 
 英文公司全称统一为 **AnnoBrain Intelligence Technology (Shanghai) Co., Ltd.**。`annobrain.com` 是正式访问域名；GitHub Pages 地址仅用于设计预览。
 
+技术平台的专家数字分身、数据安全模块采用提供的完整示意图，支持打开大图。产品页新增 `#hardware` 规划模块，展示两张家庭康复陪伴机器人概念图。中英文、深浅主题统一为“初期只需手机摄像头，后续规划机器人及其他智能硬件接入”。图片为 WebP，按屏幕宽度选择尺寸并延迟加载；手机图片约 38–67 KB / 张，完整大图约 99–446 KB / 张。样式位于两版的 `platform-content.css`。
+
 GitHub Pages 配置：Settings → Pages → Deploy from a branch → `main` → `/(root)`。网站入口：`https://hwang244.github.io/annaozhilian-website-preview/`。
 
 ## Cloudflare Pages 正式站
