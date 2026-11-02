@@ -1,0 +1,54 @@
+:root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; color: #f4f8ff; background: #0a0e1a; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+.experiment-header { height: 88px; padding: 0 5.8%; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #ffffff16; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand img { object-fit: contain; }
+.brand span { font-size: 22px; font-weight: 700; letter-spacing: 2px; }
+.brand small { display: block; font-size: 7px; letter-spacing: 1.6px; color: #9fd5e8; margin-top: 3px; }
+.back-link { font-size: 13px; color: #9cacc1; }
+.back-link span { margin-left: 14px; color: #00d2f5; }
+.experiment-hero { position: relative; min-height: 730px; height: calc(100svh - 88px); overflow: hidden; }
+.hero-copy { position: absolute; z-index: 3; top: 18%; left: 5.8%; width: 43%; max-width: 600px; pointer-events: none; }
+.eyebrow { color: #6798b7; font-size: 10px; letter-spacing: 2px; margin: 0 0 26px; }
+h1 { font-size: clamp(40px,4.5vw,68px); line-height: 1.5; font-weight: 700; letter-spacing: -2px; margin: 0; }
+h1 em { font-style: normal; color: #00d3f5; }
+.hero-lead { font-size: clamp(15px,1.55vw,22px); line-height: 1.8; font-weight: 600; margin: 27px 0 12px; color: #dce8f2; max-width: 490px; }
+.description { font-size: 14px; color: #9baec3; line-height: 2; margin: 0; }
+.compare-controls { display: inline-flex; border: 1px solid #27455e; padding: 4px; border-radius: 7px; margin-top: 35px; gap: 4px; pointer-events: auto; background: #0b1521; }
+.compare-controls button { background: none; color: #8eabc0; font-size: 12px; padding: 13px 18px; border: 0; border-radius: 4px; }
+.compare-controls button[aria-pressed="true"] { color: #031521; background: #00cef0; }
+.comparison-note { font-size: 11px; color: #5f7a92; line-height: 1.8; margin-top: 15px; }
+.neural-stage { position: absolute; inset: 0 -1% 0 auto; width: 66%; }
+.neural-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: pan-y; mix-blend-mode: screen; }
+.neural-stage.is-dragging canvas { cursor: grabbing; }
+.neural-stage canvas:focus-visible { outline: 1px solid #00cee0; outline-offset: -5px; border-radius: 14px; }
+.reference-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; mix-blend-mode: screen; opacity: .92; mask-image: linear-gradient(90deg,transparent,black 16%,black 90%,transparent); }
+.neural-stage[data-state="ready"] .reference-image { visibility: hidden; }
+.neural-stage.show-reference .reference-image { visibility: visible; }
+.neural-stage.show-reference canvas { visibility: hidden; }
+.loading-note { position: absolute; inset: auto 0 12%; text-align: center; font-size: 12px; color: #9fcee2; }
+.viewer-tools { position: absolute; z-index: 4; bottom: 8%; left: 67%; transform: translateX(-50%); display: flex; align-items: center; gap: 25px; color: #9cc9df; font-size: 11px; white-space: nowrap; }
+.viewer-tools > span { color: #00cef5; }
+.drag-note { color: #8faec5; margin-left: 8px; }
+.viewer-tools button { background: #0d2233; color: #a9c7db; padding: 8px 15px; font-size: 10px; border: 1px solid #35556b; border-radius: 20px; }
+.viewer-tools[hidden] { display: none; }
+.model-credit { position: absolute; bottom: 3%; left: 67%; transform: translateX(-50%); font-size: 9px; color: #536d84; }
+@media(max-width: 767px) {
+  .experiment-header { height: 72px; padding: 0 22px; }
+  .brand span { font-size: 18px; }
+  .brand img { width: 35px; height: 35px; }
+  .back-link { font-size: 11px; }
+  .experiment-hero { min-height: 1050px; height: auto; }
+  .hero-copy { top: 55px; left: 24px; width: calc(100% - 48px); max-width: none; }
+  .eyebrow { font-size: 9px; margin-bottom: 18px; }
+  h1 { font-size: 35px; letter-spacing: -1px; line-height: 1.5; }
+  .hero-lead { font-size: 16px; margin-top: 22px; }
+  .description { font-size: 12px; }
+  .compare-controls { margin-top: 23px; }
+  .neural-stage { top: 440px; right: -5%; width: 110%; height: 530px; }
+  .viewer-tools { bottom: 45px; left: 50%; }
+  .model-credit { left: 50%; bottom: 14px; }
+}

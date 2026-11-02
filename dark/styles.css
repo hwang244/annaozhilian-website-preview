@@ -11,3 +11,9 @@
 @media(max-width:1000px){.hero .container{margin:0 auto}}
 @media(max-width:760px){.menu-toggle{margin-right:0}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important;scroll-snap-type:none!important}*,*:before,*:after{animation:none!important;transition:none!important}.motion-ready .reveal{opacity:1;transform:none}}
+
+/* Evenly distributed collaboration categories. */
+#team .collaboration-strip { display: block; width: 100%; }
+#team .partner-types { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); width:100%; margin-top:24px; gap:24px; }
+#team .partner-types > span { display:flex; align-items:center; justify-content:center; padding:20px 8px; border-top:1px solid currentColor; }
+@media(max-width:600px){ #team .partner-types{gap:8px;} #team .partner-types > span{font-size:12px;gap:6px;} }

@@ -20,3 +20,9 @@
 @media(max-width:360px){.hero h1{font-size:38px}.brand-word{font-size:17px}.header-actions{gap:7px}.hero-tags{gap:12px}.button{padding:0 16px;gap:16px}.field-grid{grid-template-columns:1fr}.value-list{gap:27px 19px}}
 .modal{position:fixed;inset:0;margin:auto;height:fit-content;overflow:auto}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*:before,*:after{animation:none!important;transition:none!important}.motion-ready .reveal{opacity:1;transform:none}}
+
+/* Evenly distributed collaboration categories. */
+#team .collaboration-strip { display: block; width: 100%; }
+#team .partner-types { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); width:100%; margin-top:24px; gap:24px; }
+#team .partner-types > span { display:flex; align-items:center; justify-content:center; padding:20px 8px; border-top:1px solid currentColor; }
+@media(max-width:600px){ #team .partner-types{gap:8px;} #team .partner-types > span{font-size:12px;gap:6px;} }

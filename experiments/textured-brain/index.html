@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>B · 选项 2 · 精细神经表面 · 安脑智联</title>
+  <link rel="stylesheet" href="../neural-brain/experiment.css?v=2">
+  <style>
+    .download-model { display:inline-block; pointer-events:auto; margin-top:20px; padding:13px 20px; border:1px solid #365f7d; border-radius:5px; color:#bfeeff; font-size:12px; }
+    .download-model:hover { border-color:#00d3f5; }
+    .reference-image { opacity:1; }
+    .comparison-note { max-width:390px; }
+    html[data-embed=true],html[data-embed=true] body{height:100%;overflow:hidden}
+    html[data-embed=true] .experiment-header,html[data-embed=true] .hero-copy,html[data-embed=true] .viewer-tools,html[data-embed=true] .view-presets,html[data-embed=true] .model-credit{display:none!important}
+    html[data-embed=true] .experiment-hero{height:100svh;min-height:0}
+    html[data-embed=true] .neural-stage{inset:0;width:100%;height:100%;margin:0}
+    .header-links{display:flex;gap:24px;align-items:center}.header-links>a:first-child{color:#2ed1ec;font-size:12px}
+    .view-presets {position:absolute;z-index:4;left:67%;bottom:12%;transform:translateX(-50%);display:flex;gap:6px;white-space:nowrap;}
+    .view-presets[hidden] {display:none;}
+    .view-presets button {font:inherit;font-size:10px;padding:7px 11px;color:#b2cde0;background:#0d1c2c;border:1px solid #294357;border-radius:4px;cursor:pointer;}
+    .view-presets button:hover {border-color:#00d3f5;color:white;}
+    @media(max-width:767px) {.view-presets{left:50%;bottom:88px;gap:4px;}.view-presets button{padding:7px 9px;}}
+    @media(max-width:767px) { .neural-stage {top:510px;} .experiment-hero {min-height:1130px;} }
+  </style>
+  <script>if(new URLSearchParams(location.search).has('embed'))document.documentElement.dataset.embed='true';</script>
+  <script type="importmap">{"imports":{"three":"../neural-brain/vendor/three.module.js"}}</script>
+</head>
+<body>
+  <header class="experiment-header">
+    <a class="brand" href="../../dark/index.html"><img src="../../dark/assets/logo-emblem-white.png" alt="" width="43" height="43"><span>安脑智联<small>REHABILITATION</small></span></a>
+    <div class="header-links"><a href="../brain-comparison/">A / B 方案对比</a><a class="back-link" href="../../dark/index.html">返回当前首页 <span aria-hidden="true">↗</span></a></div>
+  </header>
+  <main class="experiment-hero">
+    <div class="hero-copy">
+      <p class="eyebrow">B / 选项 2 · 精细神经表面</p>
+      <h1>细化三维脑形，<br><em>延续神经光感。</em></h1>
+      <p class="hero-lead">双侧大脑半球、小脑与脑干</p>
+      <p class="description">拖动旋转，查看侧面、顶部与底部。<br>原图的神经质感，延伸到完整表面。</p>
+      <div class="compare-controls" role="group" aria-label="对比原图与贴图模型">
+        <button type="button" data-mode="model" aria-pressed="true">完整 3D 模型</button>
+        <button type="button" data-mode="reference" aria-pressed="false">原始静态图</button>
+      </div>
+      <p class="comparison-note">平滑表面，细化纤维与光点；保留完整脑形，默认静止。</p>
+      <a class="download-model" href="annobrain-neural-complete.glb" download>下载完整模型 · GLB <span aria-hidden="true">↓</span></a>
+    </div>
+    <div class="neural-stage" data-state="loading">
+      <img class="reference-image" src="../../dark/assets/brain-hero.webp" width="1536" height="1024" alt="原始发光神经大脑参考图">
+      <p class="loading-note" role="status">正在加载完整三维大脑…</p>
+    </div>
+    <div class="view-presets" role="group" aria-label="查看大脑不同方向" hidden><button type="button" data-view="left">左侧</button><button type="button" data-view="right">右侧</button><button type="button" data-view="front">正面</button><button type="button" data-view="back">背面</button><button type="button" data-view="top">顶部</button><button type="button" data-view="bottom">底部</button></div>
+    <div class="viewer-tools" hidden><span>↔ <span class="drag-note">拖动旋转 · 查看各个方向</span></span><button type="button" class="reset-view">重置视角</button></div>
+    <a class="model-credit" href="README.md" target="_blank" rel="noopener">BodyParts3D · CC BY 4.0 · 模型说明</a>
+  </main>
+  <script type="module" src="viewer.js?v=fine1"></script>
+</body>
+</html>

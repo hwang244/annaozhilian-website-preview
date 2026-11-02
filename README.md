@@ -1,5 +1,9 @@
 # 安脑智联官网 · GitHub Pages 公开预览包
 
+**3D 大脑首页方案（供评审选择）：** [A / 选项 1 首页](https://hwang244.github.io/annaozhilian-website-preview/dark/index.html?brain=a) · [B / 选项 2 首页](https://hwang244.github.io/annaozhilian-website-preview/dark/index.html?brain=b) · [A / B 并排对比](https://hwang244.github.io/annaozhilian-website-preview/experiments/brain-comparison/)
+
+首页先显示正文和原始静态图，模型完成首次绘制后显示可拖动的 3D。性能数据使用 `&metrics=1` 查看，不发送到分析服务。预览仅在 GitHub Pages 和本地启用，Cloudflare 正式站仍显示静态首页。
+
 本仓库只含静态预览文件：根目录版本选择页、`dark/` 深色首页及栏目页、`white/` 白色设计版。两版各有六个中文页面和对应六个英文页面。原始 Word 策划、研究摘录、构建脚本和未优化的 `pictures/` 图片不在发布包中。
 
 `dark/` 当前设计：页眉使用官方 REHABILITATION 完整 Logo；中文版显示“安脑智联”，英文版显示“AnnoBrain”。首页、产品方案和技术平台统一深蓝与青色配色；其他栏目保留各自的首屏图片。首页 01 使用放大的居家康复场景图，03 使用三张训练场景图，04 展示五类健康商城商品与服务。首页和动态页的“前沿动态”一次展示一个全宽主题，左右箭头切换。页面采用自然纵向滚动。
