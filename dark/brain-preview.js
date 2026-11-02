@@ -13,7 +13,7 @@ if('PerformanceObserver' in window){
 const art=document.querySelector('.hero-art');
 if(option!=='static'&&art){
   document.documentElement.dataset.brainPreview=option;
-  const style=document.createElement('link');style.rel='stylesheet';style.href=new URL('brain-preview.css?v=approvedA1',siteBase);document.head.append(style);
+  const style=document.createElement('link');style.rel='stylesheet';style.href=new URL('brain-preview.css?v=official1102',siteBase);document.head.append(style);
   const frame=document.createElement('iframe');frame.className='brain-preview-frame';frame.title=english?'Interactive 3D brain, drag to rotate':'三维神经大脑，可拖动旋转';frame.loading='eager';
   const tools=document.createElement('div');tools.className='brain-hero-tools';
   const row=document.createElement('div');row.className='brain-hero-actions';

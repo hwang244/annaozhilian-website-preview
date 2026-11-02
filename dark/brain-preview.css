@@ -12,3 +12,8 @@ html[data-brain-preview] .brain-label{pointer-events:none;bottom:14%;right:10%}
 .brain-hero-tools{position:absolute;z-index:4;right:72px;bottom:26px;text-align:right;font:10px/1.6 system-ui,sans-serif;color:#86a8bf;max-width:calc(100% - 48px)}
 .brain-hero-actions{display:flex;align-items:center;justify-content:flex-end;gap:15px}.brain-hero-tools button{font:inherit;letter-spacing:0;color:#abd5e9;background:#0b2130;border:1px solid #2d5368;border-radius:18px;padding:6px 13px;cursor:pointer}.brain-hero-tools button:hover{border-color:#00c9e6}.brain-hero-tools button[hidden]{display:none!important}.brain-hero-tools a{display:inline-block;color:#58788e;font-size:8px;margin-top:7px}.brain-hero-tools a:focus-visible,.brain-hero-tools button:focus-visible{outline:2px solid #21d0ec;outline-offset:4px}.brain-hero-tools .brain-preview-metrics{display:block;margin-top:5px}
 @media(max-width:767px){.brain-hero-tools{right:24px;bottom:59px;font-size:10px}.brain-hero-tools a{font-size:7px}.brain-hero-tools button{padding:5px 11px}html[lang=en][data-brain-preview] .hero-art{top:540px}html[lang=en][data-brain-preview] .hero{min-height:1100px}}
+@media(max-width:767px){
+  html[lang=en][data-brain-preview] .hero{display:flex;flex-direction:column;min-height:0}
+  html[lang=en][data-brain-preview] .hero>.container{order:1}
+  html[lang=en][data-brain-preview] .hero-art{position:relative;order:2;inset:auto;flex:none;margin-top:24px}
+}
