@@ -17,7 +17,10 @@ if(['a','b'].includes(option)&&(/\.github\.io$/.test(location.hostname)||['127.0
     strip.innerHTML=`<strong>${option.toUpperCase()} / 选项 ${option==='a'?'1':'2'}</strong><nav aria-label="切换首页方案"><a href="?brain=a" ${option==='a'?'aria-current="page"':''}>A 首页</a><a href="?brain=b" ${option==='b'?'aria-current="page"':''}>B 首页</a><a href="../experiments/brain-comparison/">并排对比 ↗</a><a href="index.html">静态原版</a></nav><span class="brain-preview-status" role="status">正在加载 3D，先显示原图…</span><a class="brain-preview-credit" href="../experiments/textured-brain/MODEL-ATTRIBUTION.md" target="_blank" rel="noopener">BodyParts3D · CC BY 4.0</a>`;
     document.body.append(strip);
     window.addEventListener('message',event=>{
-      if(event.origin!==location.origin||event.source!==frame.contentWindow||event.data?.type!=='brain-first-frame')return;
+      if(event.origin!==location.origin||event.source!==frame.contentWindow)return;
+      if(event.data?.type==='brain-loading'&&art.dataset.modelState!=='ready')strip.querySelector('.brain-preview-status').textContent=Number.isFinite(event.data.percent)?`3D 模型下载中 ${event.data.percent}% · 正文与原图可先浏览`:'正在下载 3D 模型…';
+      if(event.data?.type==='brain-error')strip.querySelector('.brain-preview-status').textContent='3D 加载未成功，当前显示原图；可刷新重试';
+      if(event.data?.type!=='brain-first-frame')return;
       metrics.modelReadyMs=Math.round(performance.now());Object.assign(metrics,{modelFrameMs:event.data.metrics.readyMs,modelDownloadMs:event.data.metrics.modelDownloadMs,modelTransferBytes:event.data.metrics.modelTransferBytes,modelEncodedBytes:event.data.metrics.modelEncodedBytes,cache:event.data.metrics.cache});publish();
       art.dataset.modelState='ready';strip.querySelector('.brain-preview-status').textContent='3D 已就绪 · 默认静止，拖动旋转';
       if(params.has('metrics')){

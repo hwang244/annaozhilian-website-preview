@@ -20,3 +20,5 @@ GitHub Pages 提供两个完整首页入口和并排对比入口。默认首页�
 模型来源与许可见 [B 版模型说明](../textured-brain/README.md) 和
 [A 版许可说明](../neural-brain/NOTICE.md)。材质生成记录见
 [MATERIAL-PRODUCTION.md](../textured-brain/MATERIAL-PRODUCTION.md)。
+
+体积和加载测试见 [PERFORMANCE.md](PERFORMANCE.md)。

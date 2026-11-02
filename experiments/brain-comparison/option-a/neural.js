@@ -1,4 +1,4 @@
-import {reportFirstFrame} from '../../shared/metrics.js';
+import {reportFirstFrame,reportProgress,reportFailure} from '../../shared/metrics.js?v=2';
 import * as THREE from 'three';
 import { EffectComposer } from './vendor/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from './vendor/addons/postprocessing/RenderPass.js';
@@ -27,6 +27,7 @@ for (const button of document.querySelectorAll('[data-mode]')) {
 }
 
 init().catch(error => {
+  reportFailure();
   loading.textContent = '三维效果暂不可用，当前显示原始参考图。';
   stage.dataset.state = 'fallback';
   setMode('reference');
@@ -38,7 +39,9 @@ async function init() {
     fetch('./brain.json').then(r => { if (!r.ok) throw Error('Model metadata'); return r.json(); }),
     fetch('./brain.bin.gz').then(r => {
       if (!r.ok) throw Error('Model geometry');
-      return new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+      let loaded=0;const total=Number(r.headers.get('content-length'))||20070126;
+      const progress=new TransformStream({transform(chunk,controller){loaded+=chunk.byteLength;reportProgress(stage,loaded,total);controller.enqueue(chunk);}});
+      return new Response(r.body.pipeThrough(progress).pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
     })
   ]);
   const data = {};

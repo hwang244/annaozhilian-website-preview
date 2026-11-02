@@ -2,6 +2,8 @@
 
 **3D 大脑首页方案（供评审选择）：** [A / 选项 1 首页](https://hwang244.github.io/annaozhilian-website-preview/dark/index.html?brain=a) · [B / 选项 2 首页](https://hwang244.github.io/annaozhilian-website-preview/dark/index.html?brain=b) · [A / B 并排对比](https://hwang244.github.io/annaozhilian-website-preview/experiments/brain-comparison/)
 
+模型文件：A **20.07 MB**、B **54.49 MB**。[加载测量、网络情况和测试边界](experiments/brain-comparison/PERFORMANCE.md)。
+
 首页先显示正文和原始静态图，模型完成首次绘制后显示可拖动的 3D。性能数据使用 `&metrics=1` 查看，不发送到分析服务。预览仅在 GitHub Pages 和本地启用，Cloudflare 正式站仍显示静态首页。
 
 本仓库只含静态预览文件：根目录版本选择页、`dark/` 深色首页及栏目页、`white/` 白色设计版。两版各有六个中文页面和对应六个英文页面。原始 Word 策划、研究摘录、构建脚本和未优化的 `pictures/` 图片不在发布包中。

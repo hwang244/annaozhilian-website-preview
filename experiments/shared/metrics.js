@@ -1,4 +1,13 @@
 // Report only local browser timings; nothing is transmitted to an analytics service.
+let lastProgress=0;
+export function reportProgress(stage,loaded,total) {
+  const now=performance.now();if(now-lastProgress<200&&loaded<total)return;lastProgress=now;
+  const percent=total>0?Math.min(99,Math.floor(loaded/total*100)):null;
+  const note=stage.querySelector('.loading-note');
+  if(note)note.textContent=percent===null?'正在下载三维模型…':`正在下载三维模型… ${percent}%`;
+  if(parent!==window)parent.postMessage({type:'brain-loading',loaded,total,percent},location.origin);
+}
+export function reportFailure(){if(parent!==window)parent.postMessage({type:'brain-error'},location.origin);}
 export function reportFirstFrame(stage, modelPath) {
   if(stage.dataset.firstFrameScheduled)return;
   stage.dataset.firstFrameScheduled='true';

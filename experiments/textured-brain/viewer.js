@@ -1,4 +1,4 @@
-import {reportFirstFrame} from '../shared/metrics.js';
+import {reportFirstFrame,reportProgress,reportFailure} from '../shared/metrics.js?v=2';
 import * as THREE from 'three';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
 
@@ -19,6 +19,7 @@ for(const button of document.querySelectorAll('[data-mode]'))button.addEventList
 });
 
 start().catch(error=>{
+  reportFailure();
   stage.dataset.state='fallback';status.hidden=false;
   status.textContent='三维模型暂不可用。可先查看原图，或下载 GLB 模型。';
   console.error('Original-texture brain:',error);
@@ -33,7 +34,7 @@ async function start() {
   const scene=new THREE.Scene();
   const camera=embedded?new THREE.PerspectiveCamera(35,1,.1,30):new THREE.OrthographicCamera(-2,2,2,-2,.1,20);
   camera.position.set(0,embedded ? .12 : 0,embedded ? 6 : 7);camera.lookAt(0,0,0);
-  const model=(await new GLTFLoader().loadAsync(new URL('./annobrain-neural-complete.glb?v=fine1',import.meta.url).href)).scene;
+  const model=(await new GLTFLoader().loadAsync(new URL('./annobrain-neural-complete.glb?v=fine1',import.meta.url).href,event=>reportProgress(stage,event.loaded,event.total||54487228))).scene;
   model.traverse(node=>{
     if(node.isMesh) {
       node.material.toneMapped=false;

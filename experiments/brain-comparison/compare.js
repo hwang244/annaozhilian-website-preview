@@ -7,8 +7,10 @@ window.addEventListener('message',event=>{
   if(event.origin!==location.origin)return;
   const source=frames.find(frame=>frame.contentWindow===event.source);if(!source)return;
   const message=event.data;
+  const status=document.querySelector(`[data-status="${source.dataset.option}"]`);
+  if(message?.type==='brain-loading'&&!status.classList.contains('ready'))status.textContent=Number.isFinite(message.percent)?`模型下载中… ${message.percent}%`:'模型下载中…';
+  if(message?.type==='brain-error'){status.textContent='模型加载未成功，可刷新重试';status.classList.remove('ready');}
   if(message?.type==='brain-ready') {
-    const status=document.querySelector(`[data-status="${source.dataset.option}"]`);
     status.textContent='已就绪 · 可拖动旋转';status.classList.add('ready');
     if(sync.checked)send(source,{type:'brain-pose',pose:lastPose});
   }
