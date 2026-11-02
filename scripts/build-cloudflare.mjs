@@ -19,7 +19,7 @@ async function publishHtml(directory) {
       await publishHtml(path);
     } else if (entry.isFile() && entry.name.endsWith('.html')) {
       const sitePath = relative(outputPath, path).split(sep).join('/');
-      if (sitePath.startsWith('white/')) continue;
+      if (sitePath.startsWith('white/') || sitePath.startsWith('assets/')) continue;
       const html = await readFile(path, 'utf8');
       if (!html.includes('<meta name="robots" content="noindex,nofollow">')) {
         throw new Error(`Expected preview robots tag in ${sitePath}`);

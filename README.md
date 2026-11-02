@@ -1,10 +1,12 @@
 # 安脑智联官网 · GitHub Pages 公开预览包
 
-**3D 大脑首页方案（供评审选择）：** [A / 选项 1 首页](https://hwang244.github.io/annaozhilian-website-preview/dark/index.html?brain=a&v=compact3) · [B / 选项 2 首页](https://hwang244.github.io/annaozhilian-website-preview/dark/index.html?brain=b&v=compact3) · [A / B 并排对比](https://hwang244.github.io/annaozhilian-website-preview/experiments/brain-comparison/)
+**首页视觉已确认采用 A：** [中文首页](https://hwang244.github.io/annaozhilian-website-preview/dark/index.html?v=approvedA1) · [English home](https://hwang244.github.io/annaozhilian-website-preview/dark/en/index.html?v=approvedA1) · [历史 A / B 对比](https://hwang244.github.io/annaozhilian-website-preview/experiments/brain-comparison/)
 
-当前默认资源：A **1.58 MB**；B 手机 **3.65 MB**、PC **11.90 MB**。原始模型保留作质量参考。[加载测量、网络情况和测试边界](experiments/brain-comparison/PERFORMANCE.md)。
-
-首页先显示正文和原始静态图，模型完成首次绘制后显示可拖动的 3D。性能数据使用 `&metrics=1` 查看，不发送到分析服务。预览仅在 GitHub Pages 和本地启用，Cloudflare 正式站仍显示静态首页。
+中文与英文深色首页默认加载约 **1.58 MB** 的 A 资源，默认静止、拖动旋转，可重置视角。
+正文和原始静态图先显示，首次三维绘制后显示模型；加载失败时继续保留原图。
+首页不显示评审切换栏。Cloudflare 正式站与 GitHub Pages 均使用该默认行为；
+运行时资源位于 `dark/assets/brain3d/`，随正式构建完整发布。
+[加载测量、网络情况和测试边界](experiments/brain-comparison/PERFORMANCE.md)。
 
 本仓库只含静态预览文件：根目录版本选择页、`dark/` 深色首页及栏目页、`white/` 白色设计版。两版各有六个中文页面和对应六个英文页面。原始 Word 策划、研究摘录、构建脚本和未优化的 `pictures/` 图片不在发布包中。
 
