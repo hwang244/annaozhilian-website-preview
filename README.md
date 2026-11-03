@@ -46,4 +46,5 @@ GitHub Pages 配置：Settings → Pages → Deploy from a branch → `main` →
 - 支持官网、GitHub Pages 及本地 8770 预览的明确来源；原始 IP 不写入数据库，仅保存短期匿名限流计数。单一网络每十分钟最多 20 个新预约，不影响已保存预约的重试。
 - 免费额度按 Cloudflare 平台统计：Workers 每日 100,000 请求，D1 每日 100,000 行写入（索引、限流计数等也会消耗写入，不能等同为 100,000 个预约）。
 - 在 Cloudflare → Storage & databases → D1 → 该数据库 → Explore 查看 `demo_requests`，或在 Console 查询、导出数据。邮件由服务端 Secret `DEMO_NOTIFY_EMAIL` 指定接收地址，经 FormSubmit 异步转发。首次需在收件箱点击激活邮件。失败保留待发送状态，并在后续提交时重试；数据保存不依赖邮件。
+- 添加或更新生产环境的邮箱 Secret 后，重新部署生产版本，让运行中的预约接口使用新配置。
 - 后端校验和真实 SQLite 持久化测试：`node --test tests/demo.test.mjs`。
