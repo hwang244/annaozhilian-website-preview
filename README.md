@@ -12,7 +12,7 @@
 
 `dark/` 当前设计：页眉使用官方 REHABILITATION 完整 Logo；中文版显示“安脑智联”，英文版显示“AnnoBrain”。首页、产品方案和技术平台统一深蓝与青色配色；其他栏目保留各自的首屏图片。首页 01 使用放大的居家康复场景图，03 使用三张训练场景图，04 展示五类健康商城商品与服务。首页和动态页的“前沿动态”一次展示一个全宽主题，左右箭头切换。页面采用自然纵向滚动。
 
-前沿动态包含安脑智联企业文化文章及注明来源与日期的**行业选读**，两类内容按来源分别标识。“长征精神——路，在脚下延伸！”位于首页与动态页首位，文章链接为 `news.html?article=long-march`。人物与产品图片为场景概念示意。预约表单仅在浏览器中生成预览摘要，不向服务器发送或保存。
+前沿动态包含安脑智联企业文化文章及注明来源与日期的**行业选读**，两类内容按来源分别标识。“长征精神——路，在脚下延伸！”位于首页与动态页首位，文章链接为 `news.html?article=long-march`。人物与产品图片为场景概念示意。预约表单通过官网 `/api/demo` 接口写入 Cloudflare D1，返回成功后才展示预约编号。
 
 英文公司全称统一为 **AnnoBrain Intelligence Technology (Shanghai) Co., Ltd.**。`annobrain.com` 是正式访问域名；GitHub Pages 地址仅用于设计预览。
 
@@ -31,8 +31,19 @@ GitHub Pages 配置：Settings → Pages → Deploy from a branch → `main` →
 - Build output directory：`dist`
 - Root directory：仓库根目录（留空）
 
-构建会把深色版发布到网站根目录，白色版放在 `/white/` 供预览。正式页移除设计预览专用的 `noindex` 标记并添加 canonical、站点地图；白色预览页仍保持 `noindex`。GitHub Pages 的版本选择页不受影响。尚未配置真实后端，预约演示表单只在浏览器内生成摘要，不会发送给公司。
+构建会把深色版发布到网站根目录，白色版放在 `/white/` 供预览。正式页移除设计预览专用的 `noindex` 标记并添加 canonical、站点地图；白色预览页仍保持 `noindex`。GitHub Pages 的版本选择页不受影响。预约接口由仓库根目录 `functions/api/demo.js` 提供，需绑定 D1 数据库，限流盐由服务端自动生成并保存在数据库中。静态页面和图片不计入 Functions 请求额度。
 
 若需让 `annobrain.com` 和 `www.annobrain.com` 都通过 Cloudflare Pages 访问，先在 Cloudflare 添加该域名，再到阿里云把域名的权威 DNS 服务器改为 Cloudflare 分配的两条 NS；注册商仍为阿里云。以后迁到 VPS，只需把 Cloudflare 中的站点 DNS 记录改指 VPS，或把权威 DNS 改回阿里云并在阿里云创建 A/AAAA 记录。
 
 技术平台配图统一为 16:9 WebP，手机端 800×450（每张约 48–55 KB），桌面端 1440×810（约 103–128 KB），首屏之后的配图以低优先级提前加载。可通过 `scripts/optimize-tech-images.mjs` 重新生成，需安装 Sharp，或用 `SHARP_MODULE_PATH` 指定已有 Sharp 模块。全站页头“预约演示”直达联系表单。
+
+## 预约表单接收
+
+- 正式接口：`POST https://annobrain.com/api/demo`。中英文、深浅主题以及 GitHub Pages 预览均使用该接口。
+- D1 数据库：`annobrain-demo-requests`，Pages 生产环境绑定名 `DEMO_DB`，由 `wrangler.json` 随 Git 版本配置；Cloudflare 分支预览不绑定生产数据库。首次接收时自动以幂等语句初始化表；SQL 留存在 `migrations/0001_demo_requests.sql`，与 `server/demo-schema.mjs` 保持一致。
+- 服务端自动生成限流盐，保存在私有 `demo_settings` 表中，前端与 Git 均不包含该值，无需再配置 API 密钥。
+- 表单只收集预约联系信息，服务端验证字段和同意状态。只有数据库实际保存后返回成功；同一请求重试不重复保存，失败时保留填写内容。
+- 支持官网、GitHub Pages 及本地 8770 预览的明确来源；原始 IP 不写入数据库，仅保存短期匿名限流计数。单一网络每十分钟最多 20 个新预约，不影响已保存预约的重试。
+- 免费额度按 Cloudflare 平台统计：Workers 每日 100,000 请求，D1 每日 100,000 行写入（索引、限流计数等也会消耗写入，不能等同为 100,000 个预约）。
+- 在 Cloudflare → Storage & databases → D1 → 该数据库 → Explore 查看 `demo_requests`，或在 Console 查询、导出数据。邮件由服务端 Secret `DEMO_NOTIFY_EMAIL` 指定接收地址，经 FormSubmit 异步转发。首次需在收件箱点击激活邮件。失败保留待发送状态，并在后续提交时重试；数据保存不依赖邮件。
+- 后端校验和真实 SQLite 持久化测试：`node --test tests/demo.test.mjs`。

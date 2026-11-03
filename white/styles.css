@@ -46,3 +46,9 @@
 /* Demo anchors land below the fixed header, on the form itself. */
 #contact-form{scroll-margin-top:calc(var(--header) + 24px)}
 .subnav-arrow{display:inline-block;width:17px;height:17px;flex:none;vertical-align:middle;margin-left:12px}
+
+.form-honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.form-status{margin-top:18px;font-size:14px;line-height:1.75;overflow-wrap:anywhere}
+.form-status[data-state=error]{color:#a53429}
+.form-status[data-state=success]{color:#12694f}
+.contact-form button:disabled{opacity:.65;cursor:wait}

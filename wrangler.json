@@ -1,0 +1,17 @@
+{
+  "name": "annobrain",
+  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2026-10-20",
+  "d1_databases": [
+    {
+      "binding": "DEMO_DB",
+      "database_name": "annobrain-demo-requests",
+      "database_id": "6941c989-1aa6-4194-ba82-76a76787b463"
+    }
+  ],
+  "env": {
+    "preview": {
+      "d1_databases": []
+    }
+  }
+}

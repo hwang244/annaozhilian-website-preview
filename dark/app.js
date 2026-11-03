@@ -138,38 +138,76 @@
   const form = document.querySelector('#contact-form');
   if (form) {
     const type = new URL(location.href).searchParams.get('type');
-    if ([...form.elements.type.options].some(o => o.value === type)) form.elements.type.value = type;
-    form.elements.phone.removeAttribute('pattern');
+    const setInitialType = () => {
+      if ([...form.elements.type.options].some(o => o.value === type)) form.elements.type.value = type;
+    };
+    setInitialType();
+    const status = form.querySelector('.form-status');
+    const button = form.querySelector('[type=submit]');
+    const label = button.firstChild;
+    const idleLabel = label.textContent;
+    let busy = false, pendingId = '', pendingPayload = '';
+    const newId = () => {
+      const bytes = crypto.getRandomValues(new Uint8Array(16));
+      bytes[6] = (bytes[6] & 15) | 64; bytes[8] = (bytes[8] & 63) | 128;
+      const hex = [...bytes].map(n => n.toString(16).padStart(2, '0')).join('');
+      return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
+    };
+    const showStatus = (message, state) => {
+      status.textContent = message; status.dataset.state = state; status.hidden = false;
+    };
     const validatePhone = () => {
       const value = form.elements.phone.value.trim();
       const valid = /^[+0-9()\s-]{6,25}$/.test(value) && (value.match(/[0-9]/g) || []).length >= 6;
       form.elements.phone.setCustomValidity(valid ? '' : t('请输入有效的联系电话。', 'Please enter a valid phone number.'));
     };
+    form.elements.phone.removeAttribute('pattern');
     form.elements.phone.addEventListener('input', validatePhone);
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const name = form.elements.name;
-      if (!name.value.trim()) { name.setCustomValidity(t('请填写您的姓名。', 'Please enter your name.')); name.reportValidity(); return; }
+    form.elements.name.addEventListener('input', () => form.elements.name.setCustomValidity(''));
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (busy) return;
+      if (!form.elements.name.value.trim()) {
+        form.elements.name.setCustomValidity(t('请填写您的姓名。', 'Please enter your name.'));
+      }
       validatePhone();
       if (!form.reportValidity()) return;
       const data = new FormData(form);
-      content.replaceChildren();
-      const title = document.createElement('h2'); title.id = 'modal-title'; title.textContent = t('您的预约信息预览', 'Your request preview');
-      const note = document.createElement('p'); note.textContent = t('以下信息仅显示在当前页面，尚未发送。关闭页面后不保留。', 'These details are only shown on this page. They have not been sent and are not retained after closing the page.');
-      const list = document.createElement('dl');
-      const values = [
-        [t('姓名','Name'),data.get('name').trim()], [t('电话','Phone'),data.get('phone').trim()],
-        [t('邮箱','Email'),data.get('email')], [t('机构','Organization'),data.get('organization')],
-        [t('咨询类型','Interest'),form.elements.type.selectedOptions[0].textContent], [t('需求','Goals'),data.get('message')]
-      ];
-      values.forEach(([key,value]) => {
-        if (!value) return;
-        const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = key; dd.textContent = value; list.append(dt, dd);
-      });
-      const action = document.createElement('button'); action.type = 'button'; action.className = 'button outline'; action.textContent = t('返回编辑', 'Back to edit'); action.addEventListener('click', () => modal.close());
-      const actions = document.createElement('div'); actions.className = 'actions'; actions.append(action);
-      content.append(title, note, list, actions); openModal(form.querySelector('[type=submit]'));
+      const payload = Object.fromEntries(['name','phone','email','organization','type','message','website'].map(key => [key, String(data.get(key) || '').trim()]));
+      payload.consent = data.get('consent') === 'on'; payload.lang = en ? 'en' : 'zh';
+      const serialized = JSON.stringify(payload);
+      if (serialized !== pendingPayload || !pendingId) { pendingId = newId(); pendingPayload = serialized; }
+      payload.requestId = pendingId;
+      busy = true; button.disabled = true; form.setAttribute('aria-busy', 'true');
+      label.textContent = t('正在提交…', 'Submitting…');
+      showStatus(t('正在发送预约，请稍候。', 'Sending your request. Please wait.'), 'pending');
+      const fields = [...form.querySelectorAll('input,select,textarea')];
+      fields.forEach(field => { field.disabled = true; });
+      const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), 20000);
+      try {
+        const response = await fetch(form.action, {method: 'POST', headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(payload), signal: controller.signal, credentials: 'omit'});
+        const result = await response.json();
+        if (!response.ok || result.ok !== true || result.requestId !== pendingId) {
+          const error = new Error(result.code || 'unavailable'); throw error;
+        }
+        form.reset(); setInitialType();
+        showStatus(t('预约已提交，我们将通过您留下的联系方式与您沟通。预约编号：',
+          'Your request has been received. We will contact you using the details provided. Reference: ') + result.requestId, 'success');
+        pendingId = ''; pendingPayload = '';
+      } catch (error) {
+        const message = error.message === 'rate_limited'
+          ? t('提交较为频繁，请稍后重试。您填写的内容仍保留在表单中。', 'Too many requests. Please try again later. Your details remain in the form.')
+          : error.message === 'invalid_fields'
+            ? t('请检查姓名、联系电话和邮箱格式后重试。', 'Please check your name, phone number and email, then try again.')
+            : t('暂时无法确认提交结果，请稍后重试。您填写的内容仍保留，再次提交不会重复保存同一预约。',
+              'We could not confirm your submission. Please try again. Your details remain in the form; retrying the same request will not create a duplicate.');
+        showStatus(message, 'error');
+      } finally {
+        clearTimeout(timeout); busy = false; button.disabled = false; label.textContent = idleLabel;
+        fields.forEach(field => { field.disabled = false; }); form.removeAttribute('aria-busy');
+        status.focus({preventScroll: true}); status.scrollIntoView({block: 'nearest', behavior: reduced.matches ? 'instant' : 'smooth'});
+      }
     });
-    form.elements.name.addEventListener('input', () => form.elements.name.setCustomValidity(''));
   }
 })();

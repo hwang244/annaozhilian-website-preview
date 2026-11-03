@@ -44,5 +44,7 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://w
 await writeFile(new URL('../dist/sitemap.xml', import.meta.url), sitemap);
 await writeFile(new URL('../dist/robots.txt', import.meta.url), `User-agent: *\nAllow: /\nSitemap: ${productionDomain}/sitemap.xml\n`);
 await writeFile(new URL('../dist/_redirects', import.meta.url), '/dark/* /:splat 301\n');
+// Keep static page and image requests out of the Functions daily request quota.
+await writeFile(new URL('../dist/_routes.json', import.meta.url), JSON.stringify({version: 1, include: ['/api/demo'], exclude: []}));
 
 console.log(`Prepared ${pages.length} official pages and the white preview in dist/`);
