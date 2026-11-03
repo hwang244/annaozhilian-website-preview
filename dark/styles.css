@@ -38,3 +38,11 @@ body[data-page=news] .modal-close{background:#e8f2fa;color:#124677}
 body[data-page=news] .modal .text-link{color:#1763b7}
 .story-slide-copy>.text-link{margin-top:22px;color:#73d6f2}
 @media(max-width:760px){.article-body p{font-size:14px}}
+
+/* Share the same responsive left edge as every other homepage module. */
+.hero .hero-bottom{position:absolute;left:0;right:0;padding:0}
+.hero-bottom .scroll-cue{pointer-events:auto}
+
+/* Demo anchors land below the fixed header, on the form itself. */
+#contact-form{scroll-margin-top:calc(var(--header) + 24px)}
+.subnav-arrow{display:inline-block;width:17px;height:17px;flex:none;vertical-align:middle;margin-left:12px}

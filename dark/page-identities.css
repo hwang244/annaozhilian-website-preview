@@ -112,7 +112,7 @@ body[data-page=contact] .contact-info h2{font-size:clamp(32px,3.1vw,43px)}
   .page-hero-media{position:relative;height:255px;inset:auto}
   .page-hero-image,.page-hero--product .page-hero-image,.page-hero--tech .page-hero-image,.page-hero--news .page-hero-image,.page-hero--about .page-hero-image,.page-hero--contact .page-hero-image{inset:0}
   .page-hero-image img{filter:saturate(.68) contrast(1.05) brightness(.82)!important}
-  .page-hero--news .page-hero-image img{width:200%;max-width:none;object-position:left 30%}
+  .page-hero--news .page-hero-image img{width:160%;max-width:none;object-position:50% 36%}
   .page-hero--contact .page-hero-image img{transform:scale(1.18);transform-origin:left center}
   .page-hero-image:after,.page-hero--product .page-hero-image:after,.page-hero--tech .page-hero-image:after,.page-hero--news .page-hero-image:after,.page-hero--about .page-hero-image:after,.page-hero--contact .page-hero-image:after{background:linear-gradient(0deg,#0b1628bf,transparent 55%)}
   .page-hero-image figcaption{right:15px;bottom:13px}

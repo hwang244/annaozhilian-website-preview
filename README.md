@@ -34,3 +34,5 @@ GitHub Pages 配置：Settings → Pages → Deploy from a branch → `main` →
 构建会把深色版发布到网站根目录，白色版放在 `/white/` 供预览。正式页移除设计预览专用的 `noindex` 标记并添加 canonical、站点地图；白色预览页仍保持 `noindex`。GitHub Pages 的版本选择页不受影响。尚未配置真实后端，预约演示表单只在浏览器内生成摘要，不会发送给公司。
 
 若需让 `annobrain.com` 和 `www.annobrain.com` 都通过 Cloudflare Pages 访问，先在 Cloudflare 添加该域名，再到阿里云把域名的权威 DNS 服务器改为 Cloudflare 分配的两条 NS；注册商仍为阿里云。以后迁到 VPS，只需把 Cloudflare 中的站点 DNS 记录改指 VPS，或把权威 DNS 改回阿里云并在阿里云创建 A/AAAA 记录。
+
+技术平台配图统一为 16:9 WebP，手机端 800×450（每张约 48–55 KB），桌面端 1440×810（约 103–128 KB），首屏之后的配图以低优先级提前加载。可通过 `scripts/optimize-tech-images.mjs` 重新生成，需安装 Sharp，或用 `SHARP_MODULE_PATH` 指定已有 Sharp 模块。全站页头“预约演示”直达联系表单。

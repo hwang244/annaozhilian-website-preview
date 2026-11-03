@@ -103,3 +103,7 @@ html[lang=en] .brand-type .brand-word{font-family:Arial,sans-serif;font-size:20p
   .brand-signature{font-size:6px;letter-spacing:.12em}
   .footer-main .brand-emblem{width:35px;height:35px}
 }
+
+/* Keep editorial categories readable at the same level as story sources. */
+.editorial-copy .news-meta,.news-card .news-meta{font-size:14px}
+@media(max-width:760px){.editorial-copy .news-meta,.news-card .news-meta{font-size:12px}}

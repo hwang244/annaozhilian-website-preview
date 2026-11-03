@@ -5,3 +5,8 @@
 @media(max-width:760px){
   body[data-page=product] .subnav a[href="#marketplace"]{grid-column:1/-1}
 }
+
+/* Both responsive image tiers use the same canvas and reserved layout space. */
+.tech-picture{display:contents}
+body[data-page=tech] .detail-visual.photo-visual{aspect-ratio:16/9;min-height:0;height:auto}
+body[data-page=tech] .detail-visual.photo-visual img{width:100%;height:100%;object-fit:cover}

@@ -42,3 +42,7 @@
 .article-body p{font-size:15px;line-height:1.9}
 .news-cover>img{display:block;width:100%;height:100%;object-fit:cover}
 @media(max-width:760px){.article-body p{font-size:14px}}
+
+/* Demo anchors land below the fixed header, on the form itself. */
+#contact-form{scroll-margin-top:calc(var(--header) + 24px)}
+.subnav-arrow{display:inline-block;width:17px;height:17px;flex:none;vertical-align:middle;margin-left:12px}
