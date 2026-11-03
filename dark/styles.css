@@ -27,3 +27,14 @@
  .site-footer .footer-links{column-gap:10px;font-size:12px}
  html[lang=en] .site-footer .footer-links{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:8px}
 }
+
+/* Company articles use the same reading panel across news and home. */
+.article-hero-image{display:block;width:100%;height:auto;margin:0 0 24px}
+.article-body p{font-size:15px;line-height:1.9}
+.news-cover>img{display:block;width:100%;height:100%;object-fit:cover}
+body[data-page=news] .modal{background:#fff;color:#183b60;border-color:#c8d8e9}
+body[data-page=news] .modal p{color:#52708a}
+body[data-page=news] .modal-close{background:#e8f2fa;color:#124677}
+body[data-page=news] .modal .text-link{color:#1763b7}
+.story-slide-copy>.text-link{margin-top:22px;color:#73d6f2}
+@media(max-width:760px){.article-body p{font-size:14px}}

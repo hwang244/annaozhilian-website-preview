@@ -111,7 +111,30 @@
   });
   modal.addEventListener('close', () => {
     if (modalOpener?.isConnected) modalOpener.focus({ preventScroll: true });
+    if (new URL(location.href).searchParams.has('article')) {
+      const url = new URL(location.href); url.searchParams.delete('article'); history.replaceState(null, '', url);
+    }
   });
+  const articles = JSON.parse(document.querySelector('#article-data')?.textContent || '[]');
+  function showArticle(id, opener) {
+    const article = articles.find(item => item.id === id); if (!article) return;
+    content.replaceChildren();
+    const title = document.createElement('h2'); title.id = 'modal-title'; title.textContent = article.title;
+    const body = document.createElement('div'); body.className = 'article-body';
+    if (article.image) {
+      const image = document.createElement('img'); image.className = 'article-hero-image'; image.src = article.image; image.alt = article.imageAlt || article.title; image.width = 1080; image.height = 607; image.decoding = 'async'; body.append(image);
+    }
+    article.body.forEach(text => { const paragraph = document.createElement('p'); paragraph.textContent = text; body.append(paragraph); });
+    const link = document.createElement('a'); link.className = 'text-link'; link.href = 'contact.html'; link.textContent = t('与我们交流 →', 'Talk with us →');
+    content.append(title, body, link); openModal(opener);
+  }
+  document.querySelectorAll('[data-article]').forEach(link => link.addEventListener('click', event => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault(); showArticle(link.dataset.article, link);
+    const url = new URL(location.href); url.searchParams.set('article', link.dataset.article); history.replaceState(null, '', url);
+  }));
+  const requestedArticle = new URL(location.href).searchParams.get('article');
+  if (requestedArticle) showArticle(requestedArticle);
   const form = document.querySelector('#contact-form');
   if (form) {
     const type = new URL(location.href).searchParams.get('type');

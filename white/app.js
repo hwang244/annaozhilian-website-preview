@@ -119,6 +119,9 @@
     content.replaceChildren();
     const title = document.createElement('h2'); title.id = 'modal-title'; title.textContent = article.title;
     const body = document.createElement('div'); body.className = 'article-body';
+    if (article.image) {
+      const image = document.createElement('img'); image.className = 'article-hero-image'; image.src = article.image; image.alt = article.imageAlt || article.title; image.width = 1080; image.height = 607; image.decoding = 'async'; body.append(image);
+    }
     article.body.forEach(text => { const p = document.createElement('p'); p.textContent = text; body.append(p); });
     const link = document.createElement('a'); link.className = 'text-link'; link.href = 'contact.html'; link.textContent = t('与我们交流 →', 'Talk with us →');
     content.append(title, body, link); openModal(opener);
