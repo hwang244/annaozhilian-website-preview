@@ -1,0 +1,32 @@
+/* Founder-designed mascot and the multidisciplinary team. */
+.about-mascot h2{font-size:clamp(30px,3.2vw,42px);line-height:1.4;letter-spacing:-.6px}
+.about-mascot .mascot-copy>p:not(.eyebrow){font-size:16px;line-height:1.9;color:var(--muted)}
+.about-mascot .mascot-copy>p:not(.eyebrow)+p{margin-top:16px}
+.mascot-visual{display:block;aspect-ratio:4/3;margin:0;overflow:hidden;border-radius:8px;background:#fafaf6}
+.mascot-visual img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.about-team-intro{display:grid;grid-template-columns:.9fr 1.4fr;align-items:start;gap:72px}
+.about-team-intro .section-heading{margin-top:15px}
+.about-team-description p{font-size:16px;line-height:1.9;color:var(--muted)}
+.about-team-description p+p{margin-top:18px}
+.team-expertise{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:42px}
+.expertise-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;padding:28px 16px 16px;border-top:1px solid var(--line)}
+.expertise-icon{display:grid;place-items:center;width:72px;height:72px;border:1px solid var(--line);border-radius:50%;color:var(--cyan);background:rgba(80,170,210,.06)}
+.expertise-icon svg{width:34px;height:34px}
+.expertise-label h3{font-size:20px;line-height:1.4}
+.expertise-label p{font-size:10px;line-height:1.6;letter-spacing:.08em;color:var(--muted);margin-top:7px}
+html[lang=en] .expertise-label h3{font-size:18px;min-height:2.8em}
+@media(max-width:1100px){
+ .about-team-intro{grid-template-columns:.9fr 1.4fr;gap:36px}
+ .team-expertise{gap:16px}
+ .expertise-item{padding-left:8px;padding-right:8px}
+}
+@media(max-width:760px){
+ .about-mascot .mascot-copy>p:not(.eyebrow){font-size:15px}
+ .mascot-visual{border-radius:6px}
+ .about-team-intro{grid-template-columns:1fr;gap:25px}
+ .about-team-description p{font-size:15px}
+ .team-expertise{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:32px}
+ .expertise-item{padding-top:22px}
+ .expertise-label h3{font-size:18px}
+ .expertise-label p{font-size:9px}
+}
