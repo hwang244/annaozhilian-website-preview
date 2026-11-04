@@ -66,20 +66,26 @@ test('rate limiting is atomic and a valid duplicate can still be retried at the 
 });
 test('email delivery failure does not lose an accepted appointment', async t => {
   const db = localDatabase(); const pending = [];
-  t.mock.method(globalThis, 'fetch', async () => new Response(JSON.stringify({success: 'false', message: 'Needs Activation'}), {status: 200}));
+  const mailer = {fetch: async () => new Response(JSON.stringify({ok: false}), {status: 502})};
   const input = fixture(); const response = await onRequest({request: request(input),
-    env: {DEMO_DB: db, DEMO_NOTIFY_EMAIL: 'notify@example.com'}, waitUntil: promise => pending.push(promise)});
+    env: {DEMO_DB: db, DEMO_NOTIFY_EMAIL: 'notify@example.com', DEMO_MAILER: mailer}, waitUntil: promise => pending.push(promise)});
   assert.equal(response.status, 201); await Promise.all(pending);
   const row = db.sqlite.prepare('SELECT * FROM demo_requests WHERE id = ?').get(input.requestId);
   assert.equal(row.status, 'new'); assert.equal(row.notification_state, 'pending');
-  assert.equal(row.notification_error, 'activation_required'); assert.ok(row.notification_retry_at > Date.now() / 1000);
+  assert.equal(row.notification_error, 'relay_unavailable'); assert.ok(row.notification_retry_at > Date.now() / 1000);
   db.sqlite.close();
 });
 test('a sent notification is not sent again when a client retries', async t => {
   const db = localDatabase(); const pending = []; let calls = 0;
-  t.mock.method(globalThis, 'fetch', async () => {calls++; return new Response(JSON.stringify({success: 'true'}));});
+  const mailer = {fetch: async (url, options) => {
+    calls++; assert.equal(url, 'https://demo-mailer.internal/notify');
+    const message = JSON.parse(options.body);
+    assert.equal(message.to, 'notify@example.com'); assert.equal(message.replyTo, 'test@example.com');
+    assert.match(message.text, /预约编号/); assert.match(message.text, /测试预约/);
+    return new Response(JSON.stringify({ok: true, messageId: 'test-message'}));
+  }};
   const input = fixture(); const call = () => onRequest({request: request(input),
-    env: {DEMO_DB: db, DEMO_NOTIFY_EMAIL: 'notify@example.com'}, waitUntil: promise => pending.push(promise)});
+    env: {DEMO_DB: db, DEMO_NOTIFY_EMAIL: 'notify@example.com', DEMO_MAILER: mailer}, waitUntil: promise => pending.push(promise)});
   assert.equal((await call()).status, 201); await Promise.all(pending);
   assert.equal((await call()).status, 200); await Promise.all(pending);
   assert.equal(calls, 1); assert.equal(db.sqlite.prepare('SELECT notification_state FROM demo_requests').get().notification_state, 'sent');

@@ -45,6 +45,16 @@ GitHub Pages 配置：Settings → Pages → Deploy from a branch → `main` →
 - 表单只收集预约联系信息，服务端验证字段和同意状态。只有数据库实际保存后返回成功；同一请求重试不重复保存，失败时保留填写内容。
 - 支持官网、GitHub Pages 及本地 8770 预览的明确来源；原始 IP 不写入数据库，仅保存短期匿名限流计数。单一网络每十分钟最多 20 个新预约，不影响已保存预约的重试。
 - 免费额度按 Cloudflare 平台统计：Workers 每日 100,000 请求，D1 每日 100,000 行写入（索引、限流计数等也会消耗写入，不能等同为 100,000 个预约）。
-- 在 Cloudflare → Storage & databases → D1 → 该数据库 → Explore 查看 `demo_requests`，或在 Console 查询、导出数据。邮件由服务端 Secret `DEMO_NOTIFY_EMAIL` 指定接收地址，经 FormSubmit 异步转发。首次需在收件箱点击激活邮件。失败保留待发送状态，并在后续提交时重试；数据保存不依赖邮件。
+- 在 Cloudflare → Storage & databases → D1 → 该数据库 → Explore 查看 `demo_requests`，或在 Console 查询、导出数据。邮件由服务端 Secret `DEMO_NOTIFY_EMAIL` 指定接收地址，通过 `DEMO_MAILER` 服务绑定调用内部 Worker `annobrain-demo-mailer`，由 Cloudflare 原生邮件服务发送。收件地址已在 Cloudflare 验证；失败保留待发送状态，并在后续提交时重试（目前没有独立定时重试）；数据保存不依赖邮件。`notification_state=sent` 仅表示 Cloudflare 接受发送，不代表收件箱实际送达。
 - 添加或更新生产环境的邮箱 Secret 后，重新部署生产版本，让运行中的预约接口使用新配置。
 - 后端校验和真实 SQLite 持久化测试：`node --test tests/demo.test.mjs`。
+
+## Cloudflare 预约邮件 Worker
+
+- 源码：`workers/demo-mailer/index.mjs`。独立 Worker `annobrain-demo-mailer`，使用 `EMAIL` 类型为 `send_email` 的绑定；在 Cloudflare Dashboard 编辑部署。
+- `workers.dev` 生产 URL 和 Preview URLs 均关闭，不添加自定义域名或公开路由；仅由 Pages 的 Service binding 调用。
+- Worker 私有运行时配置 `DEMO_NOTIFY_EMAIL` 与 Pages 同名 Secret 保持一致，代码拒绝向其他邮箱发送；不要把真实收件邮箱写入公开 Git。
+- 发件人固定为 `notifications@annobrain.com`，域名通过 Email Routing 配置 MX、SPF、DKIM。仅发送至账号中已验证的公司收件地址，邮件发送免费；Worker 执行另受平台请求额度限制。
+- Pages 的 `wrangler.json` 声明生产 `DEMO_MAILER` 服务绑定；preview 的 D1 和 Service bindings 为空，防止预览发送生产邮件。
+- 客户填写的邮箱只用作 Reply-To；不自动向客户发送邮件。使用纯文本正文，避免用户输入被当作 HTML。
+- 验证：`node --test tests/demo.test.mjs tests/demo-mailer.test.mjs`（Node 22+），再提交无客户信息的生产测试，并核对 D1 的通知状态及实际收件箱。

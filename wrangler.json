@@ -2,6 +2,7 @@
   "name": "annobrain",
   "pages_build_output_dir": "./dist",
   "compatibility_date": "2026-10-20",
+  "services": [{"binding": "DEMO_MAILER", "service": "annobrain-demo-mailer"}],
   "d1_databases": [
     {
       "binding": "DEMO_DB",
@@ -11,6 +12,7 @@
   ],
   "env": {
     "preview": {
+      "services": [],
       "d1_databases": []
     }
   }
