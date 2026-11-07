@@ -84,22 +84,90 @@
     const prev = shell.querySelector('[data-story-prev]');
     const next = shell.querySelector('[data-story-next]');
     const dots = [...shell.querySelectorAll('[data-story-dot]')];
-    let active = 0;
-    const update = () => {
-      active = Math.max(0, Math.min(slides.length - 1, Math.round(rail.scrollLeft / Math.max(rail.clientWidth, 1))));
-      dots.forEach((dot, index) => dot.setAttribute('aria-current', String(index === active)));
+    const count = slides.length;
+    if (count < 2) continue;
+
+    // One copy at each edge lets the rail wrap by moving just one slide.
+    const clone = slide => {
+      const copy = slide.cloneNode(true);
+      copy.setAttribute('aria-hidden', 'true');
+      copy.inert = true;
+      return copy;
     };
-    const go = index => rail.scrollTo({left: ((index % slides.length) + slides.length) % slides.length * rail.clientWidth, behavior: reduced.matches ? 'instant' : 'smooth'});
-    prev.addEventListener('click', () => go(active - 1));
-    next.addEventListener('click', () => go(active + 1));
-    dots.forEach((dot, index) => dot.addEventListener('click', () => go(index)));
-    rail.addEventListener('scroll', () => requestAnimationFrame(update), {passive:true});
+    rail.prepend(clone(slides[count - 1]));
+    rail.append(clone(slides[0]));
+
+    let active = 0;
+    let moving = false;
+    let manual = false;
+    let visible = !('IntersectionObserver' in window);
+    let autoplayTimer;
+    let settleTimer;
+
+    const moveRail = (position, behavior) => rail.scrollTo({
+      left: position * rail.clientWidth,
+      behavior,
+    });
+    const schedule = () => {
+      clearTimeout(autoplayTimer);
+      if (manual || moving || !visible || reduced.matches || document.hidden || shell.matches(':focus-within')) return;
+      autoplayTimer = setTimeout(() => go(active + 2), 5000);
+    };
+    const settle = () => {
+      clearTimeout(settleTimer);
+      const position = Math.round(rail.scrollLeft / Math.max(rail.clientWidth, 1));
+      active = (position + count - 1) % count;
+      if (position === 0 || position === count + 1) moveRail(active + 1, 'instant');
+      moving = false;
+      dots.forEach((dot, index) => dot.setAttribute('aria-current', String(index === active)));
+      schedule();
+    };
+    const waitForScroll = () => {
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(settle, 150);
+    };
+    const go = position => {
+      if (!moving && position === active + 1) return;
+      clearTimeout(autoplayTimer);
+      moving = true;
+      moveRail(position, reduced.matches ? 'instant' : 'smooth');
+      waitForScroll();
+    };
+    const selectManually = position => {
+      manual = true;
+      clearTimeout(autoplayTimer);
+      go(position);
+    };
+
+    prev.addEventListener('click', () => selectManually(active));
+    next.addEventListener('click', () => selectManually(active + 2));
+    dots.forEach((dot, index) => dot.addEventListener('click', () => selectManually(index + 1)));
+    rail.addEventListener('scroll', () => {
+      clearTimeout(autoplayTimer);
+      waitForScroll();
+    }, { passive: true });
     rail.addEventListener('keydown', e => {
       if (!['ArrowLeft','ArrowRight'].includes(e.key)) return;
-      e.preventDefault(); go(active + (e.key === 'ArrowRight' ? 1 : -1));
+      e.preventDefault();
+      selectManually(active + (e.key === 'ArrowRight' ? 2 : 0));
     });
-    window.addEventListener('resize', update);
-    update();
+    shell.addEventListener('focusin', schedule);
+    shell.addEventListener('focusout', () => queueMicrotask(schedule));
+    document.addEventListener('visibilitychange', schedule);
+    reduced.addEventListener('change', schedule);
+    window.addEventListener('resize', () => {
+      moveRail(active + 1, 'instant');
+      settle();
+    });
+    moveRail(1, 'instant');
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => {
+        visible = entry.isIntersecting && entry.intersectionRatio >= 0.25;
+        schedule();
+      }, { threshold: 0.25 }).observe(shell);
+    } else {
+      schedule();
+    }
   }
 
   const openModal = opener => { modalOpener = opener || document.activeElement; modal.showModal(); };
