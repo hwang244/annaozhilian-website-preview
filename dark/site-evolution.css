@@ -99,6 +99,7 @@ body[data-page=news] .site-footer p,body[data-page=news] .site-footer .footer-li
 .story-slide--alternate{background:#102b44}
 .story-slide-photo{position:absolute;inset:0 0 0 39%;overflow:hidden}
 .story-slide-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.68) contrast(1.08) brightness(.72)}
+.story-slide--insight .story-slide-photo img{object-position:center top}
 .story-slide-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0c2139 0%,#0c2139df 21%,#0c213955 68%,#0c213922),linear-gradient(0deg,#071626ba,transparent 45%)}
 .story-slide-inner{position:relative;z-index:1;display:flex;align-items:center;min-height:clamp(430px,55vh,620px);padding-top:50px;padding-bottom:50px}
 .story-slide-copy{width:min(600px,55%)}

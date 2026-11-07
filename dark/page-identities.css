@@ -97,6 +97,7 @@ body[data-page=about] .about-values article{padding-top:32px;border-top:2px soli
 body[data-page=contact] .content-section{position:relative;z-index:3;background:#0b1b27}
 body[data-page=contact] .contact-form{border:1px solid #478a91;background:linear-gradient(140deg,#102d38,#111c2b);box-shadow:0 25px 75px #0004}
 body[data-page=contact] .contact-info h2{font-size:clamp(32px,3.1vw,43px)}
+.contact-wechat { display: block; width: 100%; height: auto; margin-top: 12px; border-radius: 8px; }
 #contact-form{scroll-margin-top:calc(var(--header) + 30px)}
 
 @media(max-width:1000px){

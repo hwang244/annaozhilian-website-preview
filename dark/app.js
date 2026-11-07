@@ -99,7 +99,8 @@
 
     let active = 0;
     let moving = false;
-    let manual = false;
+    let nextAutoAt = 0;
+    let resumeAt = 0;
     let visible = !('IntersectionObserver' in window);
     let autoplayTimer;
     let settleTimer;
@@ -110,8 +111,20 @@
     });
     const schedule = () => {
       clearTimeout(autoplayTimer);
-      if (manual || moving || !visible || reduced.matches || document.hidden || shell.matches(':focus-within')) return;
-      autoplayTimer = setTimeout(() => go(active + 2), 5000);
+      // Focus on a story link pauses rotation; focus left on a control does not.
+      if (!visible || reduced.matches || document.hidden || rail.querySelector('.story-slide :focus')) {
+        nextAutoAt = 0;
+        return;
+      }
+      if (moving) return;
+      const now = performance.now();
+      if (!resumeAt && !nextAutoAt) nextAutoAt = now + 4000;
+      const deadline = resumeAt || nextAutoAt;
+      autoplayTimer = setTimeout(() => {
+        resumeAt = 0;
+        nextAutoAt = performance.now() + 4000;
+        go(active + 2);
+      }, Math.max(0, deadline - now));
     };
     const settle = () => {
       clearTimeout(settleTimer);
@@ -134,9 +147,9 @@
       waitForScroll();
     };
     const selectManually = position => {
-      manual = true;
-      clearTimeout(autoplayTimer);
+      resumeAt = performance.now() + 5000;
       go(position);
+      schedule();
     };
 
     prev.addEventListener('click', () => selectManually(active));
