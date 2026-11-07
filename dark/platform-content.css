@@ -10,22 +10,46 @@
 body[data-page=tech] .detail-visual.photo-visual{aspect-ratio:16/9;min-height:0;height:auto}
 body[data-page=tech] .detail-visual.photo-visual img{width:100%;height:100%;object-fit:cover}
 
-/* Family support uses the same detail grid as the other solutions. */
-.family-visual{margin:0;min-width:0;padding:34px;border:1px solid var(--line);border-radius:8px;background:var(--surface,rgba(82,157,192,.05))}
-.family-dashboard{width:100%;padding:28px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
-.family-overline{display:block;font-size:9px;letter-spacing:1.5px;color:var(--muted);margin-bottom:24px}
-.family-heading{display:flex;align-items:center;gap:14px}
-.family-avatar{display:grid;place-items:center;flex:none;width:48px;height:48px;border:1px solid var(--line);border-radius:50%;color:var(--cyan,var(--blue))}
-.family-avatar svg{width:28px;height:28px}
-.family-heading h3{font-size:20px;line-height:1.4}
-.family-heading p{font-size:12px;line-height:1.6;color:var(--muted);margin-top:5px}
-.family-badge{display:inline-block;margin:20px 0 22px;padding:5px 10px;border:1px solid var(--line);border-radius:4px;font-size:10px;color:var(--muted)}
-.family-tiles{display:grid;gap:12px}
-.family-tile{display:flex;align-items:center;gap:15px;padding:16px;border:1px solid var(--line);border-radius:6px}
-.family-tile svg{flex:none;width:25px;height:25px;color:var(--cyan,var(--blue))}
-.family-tile b,.family-tile span{display:block}
-.family-tile b{font-size:14px}.family-tile span{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.5}
-.family-visual figcaption{font-size:10px;color:var(--muted);text-align:center;margin-top:18px;letter-spacing:1px}
-@media(max-width:760px){.family-visual{padding:22px}.family-dashboard{padding:22px}.family-heading h3{font-size:18px}}
+/* Keep the family feature table in the right column of the product section. */
+.family-feature-panel {
+  min-width: 0;
+  padding: clamp(12px, 2vw, 26px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+}
 
-@media(min-width:761px) and (max-width:1100px){.family-visual{padding:25px}.family-dashboard{padding:22px}.family-heading h3{font-size:18px}}
+.family-feature-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.55;
+  text-align: left;
+}
+
+.family-feature-table caption {
+  padding: 0 10px 16px;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.family-feature-table th,
+.family-feature-table td {
+  padding: 12px 10px;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.family-feature-table thead th {
+  background: color-mix(in srgb, var(--cyan) 8%, var(--bg));
+  color: var(--cyan);
+  font-weight: 650;
+}
+
+.family-feature-table th:first-child { width: 36%; }
+.family-feature-table tbody th { font-weight: 650; }
+.family-feature-table tbody td { color: var(--muted); }
+.family-feature-table tbody tr + tr { border-top: 1px solid var(--line); }
