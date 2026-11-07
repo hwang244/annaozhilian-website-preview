@@ -20,7 +20,7 @@ function ensureSchema(db) {
 }
 const ORIGINS = new Set(['https://annobrain.com', 'https://www.annobrain.com',
   'https://hwang244.github.io', 'http://127.0.0.1:8770', 'http://localhost:8770']);
-const TYPES = new Set(['demo', 'patient', 'expert', 'organization', 'partnership', 'media', 'careers']);
+const TYPES = new Set(['demo', 'patient', 'family', 'expert', 'organization', 'partnership', 'media', 'careers']);
 const MAX_BYTES = 16 * 1024;
 
 function headers(origin) {

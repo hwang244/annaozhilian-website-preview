@@ -58,3 +58,11 @@ GitHub Pages 配置：Settings → Pages → Deploy from a branch → `main` →
 - Pages 的 `wrangler.json` 声明生产 `DEMO_MAILER` 服务绑定；preview 的 D1 和 Service bindings 为空，防止预览发送生产邮件。
 - 客户填写的邮箱只用作 Reply-To；不自动向客户发送邮件。使用纯文本正文，避免用户输入被当作 HTML。
 - 验证：`node --test tests/demo.test.mjs tests/demo-mailer.test.mjs`（Node 22+），再提交无客户信息的生产测试，并核对 D1 的通知状态及实际收件箱。
+
+## 2026-11-06 内容更新
+
+- 关于我们替换为提供的新版“安心”图片，团队介绍采用确认的三段公司文案，新增团队研讨与伙伴交流两张公司图片。
+- 深色首页技术模块的 02 / INTERACTIVE 使用提供的太空保卫战动作训练图片。新图片保留完整比例，提供 800 / 1600 像素 WebP。
+- 首页及前沿动态增加明确的文章查看按钮。企业文化文章继续在站内阅读；行业选读跳转可核对的原文或文献摘要页，并同步标注来源与日期。训练科技：[npj Digital Medicine](https://www.nature.com/articles/s41746-026-02383-1)；临床决策：[BMJ](https://www.bmj.com/content/392/bmj-2025-085810)；远程康复：[Clinical Rehabilitation / PubMed](https://pubmed.ncbi.nlm.nih.gov/42434911/)；居家实践：[河北省老年医院](https://www.hbslnyy.com/html/jiankangzhishi/2330.html)。远程康复条目改用同主题的已确认综述，取代未取得原文链接的旧索引条目。
+- 产品页新增 `#family` 家属端，包含授权关联、训练进展、训练与随访提醒、专业沟通。首页同步补充家属端入口和四端协同说明，中英文及深浅主题保持一致。
+- 预约表单支持 `family` 咨询分类，后端校验、保存与通知文案同步支持；数据库结构不变。

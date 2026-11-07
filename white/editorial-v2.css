@@ -107,3 +107,9 @@ html[lang=en] .brand-type .brand-word{font-family:Arial,sans-serif;font-size:20p
 /* Keep editorial categories readable at the same level as story sources. */
 .editorial-copy .news-meta,.news-card .news-meta{font-size:14px}
 @media(max-width:760px){.editorial-copy .news-meta,.news-card .news-meta{font-size:12px}}
+
+.editorial-copy>.editorial-read-link{margin-top:18px}
+
+.solution-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}
+.family-home-visual{padding:0;overflow:hidden}.family-home-visual>img{width:100%;height:100%;object-fit:cover}
+@media(max-width:760px){.solution-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}

@@ -1,4 +1,4 @@
-const INTERESTS = {demo: '预约产品演示', patient: '患者端咨询', expert: '专家端咨询',
+const INTERESTS = {demo: '预约产品演示', patient: '患者端咨询', family: '家属端咨询', expert: '专家端咨询',
   organization: '机构端咨询', partnership: '商务 / 机构合作', media: '媒体交流', careers: '人才交流'};
 
 export function queueDemoNotification(context, id) {

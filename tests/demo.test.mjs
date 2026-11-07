@@ -22,6 +22,23 @@ test('a successful response corresponds to a persisted, complete appointment', a
   assert.equal(saved.name, input.name); assert.equal(saved.phone, input.phone); assert.equal(saved.interest, 'demo');
   assert.equal(saved.consent_at, saved.created_at); assert.equal(saved.status, 'new'); db.sqlite.close();
 });
+test('family inquiries persist their category and label the notification', async t => {
+  const db = localDatabase(); t.after(() => db.sqlite.close());
+  const pending = []; const messages = [];
+  const mailer = {fetch: async (url, options) => {
+    messages.push(JSON.parse(options.body));
+    return new Response(JSON.stringify({ok: true, messageId: 'family-test'}));
+  }};
+  const input = fixture({type: 'family'});
+  const response = await onRequest({request: request(input),
+    env: {DEMO_DB: db, DEMO_NOTIFY_EMAIL: 'notify@example.com', DEMO_MAILER: mailer},
+    waitUntil: promise => pending.push(promise)});
+  assert.equal(response.status, 201); await Promise.all(pending);
+  assert.equal(db.sqlite.prepare('SELECT interest FROM demo_requests').get().interest, 'family');
+  assert.equal(messages.length, 1);
+  assert.match(messages[0].subject, /家属端咨询/);
+  assert.match(messages[0].text, /家属端咨询/);
+});
 test('a newly bound empty database is initialized without a manual SQL step', async () => {
   const {db, call} = setup(); db.sqlite.exec('DROP TABLE demo_requests; DROP TABLE demo_rate_limits;');
   assert.equal((await call(fixture())).status, 201);

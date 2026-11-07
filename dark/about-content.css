@@ -2,7 +2,7 @@
 .about-mascot h2{font-size:clamp(30px,3.2vw,42px);line-height:1.4;letter-spacing:-.6px}
 .about-mascot .mascot-copy>p:not(.eyebrow){font-size:16px;line-height:1.9;color:var(--muted)}
 .about-mascot .mascot-copy>p:not(.eyebrow)+p{margin-top:16px}
-.mascot-visual{display:block;aspect-ratio:4/3;margin:0;overflow:hidden;border-radius:8px;background:#fafaf6}
+.mascot-visual{display:block;aspect-ratio:16/9;margin:0;overflow:hidden;border-radius:8px;background:#fafaf6}
 .mascot-visual img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
 .about-team-intro{display:grid;grid-template-columns:.9fr 1.4fr;align-items:start;gap:72px}
 .about-team-intro .section-heading{margin-top:15px}
@@ -30,3 +30,11 @@ html[lang=en] .expertise-label h3{font-size:18px;min-height:2.8em}
  .expertise-label h3{font-size:18px}
  .expertise-label p{font-size:9px}
 }
+
+/* User-provided company views retain their complete 16:9 composition. */
+.about-company-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin-top:48px}
+.company-figure{margin:0;min-width:0;overflow:hidden}
+.company-figure img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;border-radius:8px}
+.company-figure figcaption{display:flex;flex-direction:column;gap:8px;margin-top:18px;font-size:16px;color:var(--text)}
+.company-figure figcaption span{font-size:10px;letter-spacing:1.4px;color:var(--muted)}
+@media(max-width:760px){.about-company-gallery{grid-template-columns:1fr;gap:30px;margin-top:36px}}
